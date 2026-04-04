@@ -4,45 +4,139 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jackson Lieberman</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 <body>
     <header>
-        <h1>Jackson Lieberman</h1>
-        <p>10th Grade Student at the Greenwich Country Day School</p>
+        <div class="header-inner">
+            <img src="images/Lieberman_Jackson.jpg" alt="Jackson Lieberman" class="headshot">
+            <div class="header-text">
+                <h1>Jackson Lieberman</h1>
+                <p class="subtitle">10th Grade · Greenwich Country Day School · Chemical Engineering</p>
+                <nav>
+                    <a href="#about">About</a>
+                    <a href="#projects">Projects</a>
+                    <a href="#contact">Contact</a>
+                </nav>
+            </div>
+        </div>
     </header>
 
     <div class="container">
-        <section id="contact">
-            <h2>Contact Me</h2>
+        <section id="about">
+            <div class="about-body">
+                <span class="section-label">About</span>
+                <p>I'm a high school student passionate about AI, machine learning, and chemical engineering. I enjoy building projects that combine cutting-edge technology with real-world problems, from computationally engineering thermostable enzymes to building multi-agent AI systems.</p>
+            </div>
+        </section>
+
+        <section id="projects">
+            <span class="section-label">Projects</span>
+
+            <!-- Featured projects -->
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="card-img">
+                        <img src="images/trip.png" alt="Triple disulfide FAST-PETase structure in PyMOL">
+                    </div>
+                    <div class="card-body">
+                        <span class="tag tag-chem">Chemical Engineering</span>
+                        <h3><a href="thermostable-petase.html">Thermostable PETase Design</a></h3>
+                        <p>Computationally engineered disulfide bonds into FAST-PETase using PyMOL and MD simulations, achieving a 50–70 °C stable temperature window for enzymatic PET depolymerization.</p>
+                        <a href="thermostable-petase.html" class="card-link">Read more →</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="card-img">
+                        <img src="images/geosolvr-workflow.png" alt="GeoSolvr multi-agent workflow diagram">
+                    </div>
+                    <div class="card-body">
+                        <span class="tag tag-ai">AI / Multi-Agent</span>
+                        <h3><a href="geo.html">GeoSolvr</a></h3>
+                        <p>Multi-agent AI system that solves GeoGuessr using an image URL, using specialized agents for image analysis, language detection, and geographic reasoning.</p>
+                        <a href="geo.html" class="card-link">Read more →</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="card-img">
+                        <img src="images/gfs.jpg" alt="Jackson presenting at Greenwich Finance Series">
+                    </div>
+                    <div class="card-body">
+                        <span class="tag tag-ai">AI / Finance</span>
+                        <h3><a href="gfs.html">Greenwich Finance Series</a></h3>
+                        <p>Co-organized and led the AI section of a 40+ student finance &amp; AI workshop at Greenwich Town Hall. Built and demoed a live stock prediction agent hands-on.</p>
+                        <a href="gfs.html" class="card-link">Read more →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- More projects (hidden by default) -->
+            <div class="more-projects" id="moreProjects">
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="card-img">
+                            <img src="images/bcm-alphafold.png" alt="BCM_v2 AlphaFold structure">
+                        </div>
+                        <div class="card-body">
+                            <span class="tag tag-chem">Chemical Engineering</span>
+                            <h3><a href="blend-cleaver-mini.html">Blend-Cleaver-Mini</a></h3>
+                            <p>A modular fusion enzyme that depolymerizes PET blends and adhesive-laminates, designed using AlphaFold.</p>
+                            <a href="blend-cleaver-mini.html" class="card-link">Read more →</a>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="card-img">
+                            <img src="images/cleancrop-ui.png" alt="CleanCrop.AI plant disease detection UI">
+                        </div>
+                        <div class="card-body">
+                            <span class="tag tag-ai">AI / ML</span>
+                            <h3><a href="https://jackson-lieberman.github.io/cleancrop/" target="_blank">CleanCrop.AI</a></h3>
+                            <p>An AI-based tool for identifying plant diseases.</p>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="card-img">
+                            <img src="images/rps-game.png" alt="Rock Paper Scissors game screenshot">
+                        </div>
+                        <div class="card-body">
+                            <span class="tag tag-web">Web</span>
+                            <h3><a href="https://jackson-lieberman.github.io/rockpaperscissors/" target="_blank">Rock Paper Scissors</a></h3>
+                            <p>Rock Paper Scissors built using HTML and JavaScript.</p>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="card-body">
+                            <span class="tag tag-python">Python</span>
+                            <h3><a href="https://jackson-lieberman.github.io/dimentionalanalysis/" target="_blank">Dimensional Analysis Calculator</a></h3>
+                            <p>Dimensional analysis calculator built in Python for chemistry class.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="show-more-btn" id="showMoreBtn" onclick="toggleMore()">View all projects ↓</button>
+        </section>
+
+<section id="contact">
+            <span class="section-label">Contact</span>
             <p>
                 Email: jacksonslieberman at gmail dot com<br>
                 GitHub: <a href="https://github.com/Jackson-Lieberman" target="_blank">github.com/Jackson-Lieberman</a><br>
                 LinkedIn: <a href="https://www.linkedin.com/in/jackson-lieberman-a34aa6330/" target="_blank">linkedin.com/in/jackson-lieberman</a>
             </p>
         </section>
-
-        <section id="projects">
-            <h2>Projects</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <h3><a href="cleancrop.html">CleanCrop.AI</a></h3>
-                    <p>An AI-based tool for identifing plant diseases.</p>
-                </div>
-                <div class="project-card">
-                    <h3><a href="project2.html">Rock Paper Scissors</a></h3>
-                    <p>Rock Paper Scissors built using HTML and Java.</p>
-                </div>
-                <div class="project-card">
-                    <h3><a href="project3.html">Dimentional Analysis Calculator</a></h3>
-                    <p>Dimentional Analysis Calculator built using python for my chem class.</p>
-                </div>
-                <div class="project-card">
-                    <h3><a href="blend-cleaver-mini.html">Blend-Cleaver-Mini</a></h3>
-                    <p>An enzyme that depolymerizes PET blends and adhesive-laminates.</p>
-                </div>
-            </div>
-        </section>
     </div>
+
+    <script>
+        function toggleMore() {
+            const more = document.getElementById('moreProjects');
+            const btn = document.getElementById('showMoreBtn');
+            const expanded = more.classList.toggle('expanded');
+            btn.textContent = expanded ? 'Show less ↑' : 'View all projects ↓';
+        }
+    </script>
 </body>
 </html>

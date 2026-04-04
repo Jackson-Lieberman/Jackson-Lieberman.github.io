@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thermostable PETase Design - Jackson Lieberman</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+<body>
+    <header>
+        <div class="header-inner">
+            <div class="header-text">
+                <h1>Thermostable PETase Design</h1>
+                <p class="subtitle">Computational Engineering of a Thermostable Enzyme for PET Degradation Through Manipulation of Disulfide Bonds</p>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="content-section">
+            <div style="text-align:center;"><div class="award-banner">
+                <span class="award-icon">🏆</span>
+                <span>CSEF Finalist &amp; First Honors Distinction</span>
+            </div></div>
+        </section>
+
+        <section class="content-section">
+            <div class="detail-photo">
+                <img src="images/trip.png" alt="Triple disulfide FAST-PETase structure in PyMOL">
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2>Project Overview</h2>
+            <p style="text-align: center;">
+                Plastic pollution accounts for ~12% of global solid waste, yet only ~10% of PET plastic is currently recycled.
+                PETase enzymes offer a biocatalytic recycling pathway, but their poor thermostability limits industrial viability —
+                wild-type PETase functions only between 30–40 °C, far below PET's glass transition temperature of ~75 °C.
+                This study used computational protein design to engineer disulfide bonds into FAST-PETase,
+                producing variants with significantly improved thermal stability validated through molecular dynamics simulations.
+            </p>
+        </section>
+
+        <section class="content-section">
+            <h2>Methods</h2>
+            <ul>
+                <li>Procured WT PETase, ThermoPETase, and FAST-PETase structures from the Protein Data Bank (PDB).</li>
+                <li>Identified thermally weak residues (Y69, A82, V107, M156) from Stockinger et al. (2025) using PyMOL.</li>
+                <li>Mutated candidate residue pairs to cystine using PyMOL's Mutagenesis Wizard to form engineered disulfide bonds.</li>
+                <li>Validated 3D structure and confidence via AlphaFold (pLDDT scoring); discarded low-confidence variants.</li>
+                <li>Ran molecular dynamics simulations (OpenMM + PDBFixer) at 30–80 °C in 10 °C increments, 3 replicates each.</li>
+                <li>Measured thermostability via backbone RMSD, per-residue RMSF, radius of gyration (Rg), and native contacts (Q).</li>
+                <li>Used two-way repeated-measures ANCOVA and linear regression to analyze results in JMP.</li>
+            </ul>
+        </section>
+
+        <section class="content-section">
+            <h2>Key Results</h2>
+            <ul>
+                <li>Triple Disulfide FAST-PETase achieved the highest mean Q (58.28%) vs. 53.36% for FAST-PETase WT.</li>
+                <li>At 70 °C, Triple Disulfide Q (62.5%) was significantly higher than the next best enzyme (52.9%).</li>
+                <li>Superior temperature window of 50–70 °C — the only variant to reach 70 °C as its peak stability range.</li>
+                <li>Lowest mean backbone RMSD (0.0896) and smallest thermal expansion (ΔRg) across the temperature range.</li>
+                <li>Engineered disulfide S–S distances remained centered near 2.0–2.05 Å at both 30 °C and 80 °C, confirming bond integrity.</li>
+                <li>Protein variant had a significant effect on Q (F(7,94) = 2.7; p = 0.01) and Rg (F(7,94) = 5.7; p &lt; .0001).</li>
+            </ul>
+        </section>
+
+        <section class="content-section">
+            <h2>What I Learned</h2>
+            <ul>
+                <li>Rational disulfide bond engineering at thermally weak regions can substantially improve enzyme thermostability.</li>
+                <li>Native contacts (Q) is a more sensitive stability metric than RMSD for localized structural improvements.</li>
+                <li>How to run and analyze molecular dynamics simulations using Python, OpenMM, and PDBFixer.</li>
+                <li>How to design protein mutations in PyMOL and validate them with AlphaFold confidence scores.</li>
+                <li>Statistical analysis of multi-condition biological simulation data using ANCOVA in JMP.</li>
+            </ul>
+        </section>
+
+        <section class="content-section">
+            <h2>Tools &amp; Technologies</h2>
+            <ul>
+                <li>PyMOL — structural visualization and mutagenesis</li>
+                <li>AlphaFold — 3D structure prediction and pLDDT confidence scoring</li>
+                <li>OpenMM + PDBFixer — molecular dynamics simulations (Python)</li>
+                <li>JMP — statistical analysis (ANCOVA, linear regression)</li>
+                <li>Protein Data Bank (PDB) — source structures</li>
+            </ul>
+        </section>
+
+        <section class="content-section">
+            <h2>Next Steps</h2>
+            <ul>
+                <li>Wet-lab validation: clone, express, and purify top in silico variants.</li>
+                <li>Measure PET depolymerization kinetics at elevated temperatures and compare against the FAST-PETase benchmark.</li>
+                <li>Build a reinforcement learning agent to autonomously run MD simulations and optimize disulfide placement at scale.</li>
+            </ul>
+        </section>
+
+        <section class="content-section">
+            <h2>Research Poster</h2>
+            <div class="detail-photo">
+                <img src="images/petase-poster.png" alt="CSEF research poster — Thermostable PETase Design">
+            </div>
+        </section>
+
+        <section>
+            <a href="index.html" class="back-link">← Back to Portfolio</a>
+        </section>
+    </div>
+</body>
+</html>
