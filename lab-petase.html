@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wet-Lab PETase Engineering - Jackson Lieberman</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+<body>
+    <header>
+        <div class="header-inner">
+            <div class="header-text">
+                <h1>Wet-Lab PETase Engineering</h1>
+                <p class="subtitle">Validating my computationally designed FAST-PETase variants at GenSpace, a community bio lab in Brooklyn</p>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="content-section">
+            <h2>Project Overview</h2>
+            <p style="text-align: center;">
+                This is the wet-lab continuation of my computational PETase work. Previously, I computationally engineered
+                disulfide bonds into FAST-PETase and used molecular dynamics simulations to show improved thermal stability.
+                After emailing nearly 50 labs, I found a home at GenSpace in Brooklyn, where I'm bringing those designs into the lab: expressing and purifying FAST-PETase and a disulfide-engineered
+                variant in <em>E.&nbsp;coli</em>, confirming the engineered bond, and directly measuring whether the variant
+                is more thermostable and degrades PET faster or at higher temperatures than the control.
+            </p>
+        </section>
+
+        <section class="content-section">
+            <h2>Background</h2>
+            <ul>
+                <li>PETase (from <em>Ideonella sakaiensis</em>) breaks PET into MHET, which MHETase further degrades to terephthalic acid and ethylene glycol — a biocatalytic recycling pathway.</li>
+                <li>FAST-PETase (Functional, Active, Stable, Tolerant) carries five mutations vs. wild-type and can nearly fully degrade untreated post-consumer PET in about a week at 50&nbsp;°C — but loses function above 50&nbsp;°C.</li>
+                <li>My computational variants added engineered disulfide bonds at thermally weak regions, and MD simulations predicted improved stability. This project tests those predictions experimentally.</li>
+            </ul>
+        </section>
+
+        <section class="content-section">
+            <h2>Approach</h2>
+            <ul>
+                <li><strong>Express &amp; purify the control:</strong> transform the FAST-PETase plasmid (pET21b, C-terminal His-tag) into <em>E.&nbsp;coli</em> BL21(DE3), induce with IPTG, and purify by affinity chromatography.</li>
+                <li><strong>Build the variant:</strong> introduce the disulfide mutation by site-directed mutagenesis, then express and purify it the same way.</li>
+                <li><strong>Confirm the bond:</strong> verify that the engineered disulfide formed by comparing the two proteins on SDS-PAGE.</li>
+                <li><strong>Measure stability:</strong> determine the melting temperature (Tm) of both proteins by differential scanning fluorimetry (DSF) and compare.</li>
+                <li><strong>Test function:</strong> incubate both with amorphous PET film across a temperature range and measure product release by HPLC to see whether the variant degrades PET faster or at higher temperatures.</li>
+            </ul>
+        </section>
+
+        <section class="content-section">
+            <h2>Starting Experiments</h2>
+            <ul>
+                <li><strong>Experiment 1 — Expression &amp; purification:</strong> can I successfully express and purify FAST-PETase in BL21(DE3)? Transform by heat shock, control antibiotic and IPTG concentration, induction temperature, and lysis method; assess by growth curve, SDS-PAGE (band size and purity), and protein concentration.</li>
+                <li><strong>Experiment 2 — Stability comparison:</strong> once both proteins are in hand, compare their melting temperatures by DSF to test whether the engineered disulfide raises Tm.</li>
+            </ul>
+        </section>
+
+        <section class="content-section">
+            <h2>Key Considerations</h2>
+            <ul>
+                <li><strong>Induction optimization:</strong> lowering IPTG concentration and temperature reduces expression pressure and improves soluble yield.</li>
+                <li><strong>Disulfide formation:</strong> the BL21 cytoplasm reduces disulfide bonds while the periplasm allows them to form — a real constraint for a disulfide-engineered enzyme.</li>
+                <li><strong>Substrate choice:</strong> labs use amorphous PET because it's more accessible to the enzyme than the crystalline PET in bottles.</li>
+            </ul>
+        </section>
+
+        <section class="content-section">
+            <h2>Tools &amp; Equipment</h2>
+            <ul>
+                <li>Recombinant expression: pET21b plasmid, <em>E.&nbsp;coli</em> BL21(DE3), IPTG induction</li>
+                <li>Growth &amp; lysis: LB broth/agar, antibiotic, incubator, OD600 reader, centrifuge, sonicator</li>
+                <li>Purification: affinity resin and columns</li>
+                <li>Analysis: SDS-PAGE, differential scanning fluorimetry (Tm), HPLC (product release)</li>
+            </ul>
+        </section>
+
+        <section class="content-section">
+            <h2>Related Work</h2>
+            <p style="text-align:center;">
+                This project builds directly on my computational study —
+                <a href="thermostable-petase.html">Thermostable PETase Design →</a>
+            </p>
+        </section>
+
+        <section>
+            <a href="index.html" class="back-link">← Back to Portfolio</a>
+        </section>
+    </div>
+</body>
+</html>

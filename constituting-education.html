@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Constituting Education - Jackson Lieberman</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+<body>
+    <header>
+        <div class="header-inner">
+            <div class="header-text">
+                <h1>Constituting Education</h1>
+                <p class="subtitle">A computational text-analysis study of what national education policy says schools are <em>for</em></p>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="content-section">
+            <h2>Project Overview</h2>
+            <p style="text-align: center;">
+                Every country writes down, somewhere, what it believes schools are <em>for</em>. This project applies
+                computational text analysis to national education policy documents from roughly ten countries to test a single question:
+                has the language of <strong>human capital</strong> — skills, workforce readiness, economic productivity —
+                displaced older humanistic, civic, and religious conceptions of the purpose of education? The output is a
+                publication-quality research paper (~8–10k words) built on a corpus I constructed from scratch.
+            </p>
+        </section>
+
+        <section class="content-section">
+            <h2>The Central Question</h2>
+            <p style="text-align: center;">
+                Since roughly the 1980s, market language — human capital, "college-and-career readiness," competitiveness —
+                appears to have crowded out older languages of humanistic flourishing, civic virtue, and religious formation.
+                The United States is the clearest case. The question this project asks is whether that shift is universal,
+                by measuring how much weight each conception carries across countries and over time.
+            </p>
+        </section>
+
+        <section class="content-section">
+            <h2>Theoretical Framework</h2>
+            <p style="text-align:center;">The analytic spine is Biesta's three functions of education:</p>
+            <ul>
+                <li><strong>Qualification</strong> ≈ human capital — "preparing students for the workforce."</li>
+                <li><strong>Socialization</strong> ≈ civic / religious — "instilling values, national identity, tradition."</li>
+                <li><strong>Subjectification</strong> ≈ flourishing — "developing autonomous, curious, creative persons."</li>
+            </ul>
+            <p style="text-align:center;">Tracking the relative weight of these three, per country and over time, <em>is</em> the argument.</p>
+        </section>
+
+        <section class="content-section">
+            <h2>Building the Corpus</h2>
+            <ul>
+                <li>No off-the-shelf dataset exists — I am constructing it: ~10–13 documents, one primary per country, all the same genre (national curriculum framework, with national education policy/act as a fallback).</li>
+                <li>The genre rule is critical: comparing a curriculum framework to a sector financing plan compares ideology to logistics, not ideology to ideology.</li>
+                <li><strong>Wave 1 (clean English pilot):</strong> US, Finland, Singapore, South Africa, Kenya, India, Afghanistan, UK, Norway, Rwanda.</li>
+                <li><strong>Wave 2 (translation-gated):</strong> China, Brazil, Iran — added once the pipeline is validated.</li>
+                <li>Each primary document is logged with source, issuing body, year, language, and a metadata table (<code>corpus_meta.csv</code>) carrying covariates like region, regime score (V-Dem), income level (World Bank), and legal tradition.</li>
+            </ul>
+        </section>
+
+        <section class="content-section">
+            <h2>Method</h2>
+            <ul>
+                <li>Pre-register the research question, directional hypothesis, genre rule, and four seed keyword lists <em>before</em> modeling — an anti-confirmation-bias gate.</li>
+                <li>Extract text from each primary PDF (<code>pdfplumber</code> / <code>pdftools</code>), with OCR where needed, isolating aims and purpose passages.</li>
+                <li>Preprocess into a document-feature matrix (lowercasing, boilerplate stripping, domain stopwords, lemmatization, key bigrams) at both whole-document and section level.</li>
+                <li><strong>Model in three passes:</strong> STM with covariates (unsupervised discovery), keyATM with four seed lists (theory-directed), and BERTopic at section level (embedding-based robustness check).</li>
+                <li>Map the resulting topics back to Biesta's three functions with a two-coder reliability check, then analyze prevalence by covariate and trace the US temporal arc (1918 → 1965 → 1983 → 1994 → 2001 → 2010).</li>
+            </ul>
+        </section>
+
+        <section class="content-section">
+            <h2>Tools &amp; Technologies</h2>
+            <ul>
+                <li>Python (<code>pdfplumber</code>) and R (<code>pdftools</code>) — text extraction</li>
+                <li>STM — structural topic modeling with covariates</li>
+                <li>keyATM — seeded, theory-directed topic modeling</li>
+                <li>BERTopic — embedding-based topic modeling for triangulation</li>
+                <li>V-Dem, World Bank, and JuriGlobe — covariate data sources</li>
+            </ul>
+        </section>
+
+        <section class="content-section">
+            <h2>What I'm Learning</h2>
+            <ul>
+                <li>How to design a defensible comparative corpus, where genre control matters as much as the modeling.</li>
+                <li>How pre-registration guards a text-analysis study against confirmation bias.</li>
+                <li>How to triangulate unsupervised, seeded, and embedding-based topic models to make a finding robust rather than an artifact of one method.</li>
+                <li>How to connect a computational result back to a genuine argument in the philosophy of education.</li>
+            </ul>
+        </section>
+
+        <section>
+            <a href="index.html" class="back-link">← Back to Portfolio</a>
+        </section>
+    </div>
+</body>
+</html>

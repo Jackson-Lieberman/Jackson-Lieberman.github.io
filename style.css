@@ -142,7 +142,8 @@ header .subtitle {
 
 header nav {
     display: flex;
-    gap: 28px;
+    flex-wrap: wrap;
+    gap: 8px 28px;
 }
 
 header nav a {
@@ -171,6 +172,85 @@ header nav a:hover {
 #about p {
     font-size: 1.05em;
     line-height: 1.8;
+}
+
+#about p + p {
+    margin-top: 16px;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    margin-top: 40px;
+}
+
+.stat {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+}
+
+.stat-num {
+    display: block;
+    font-size: 1.5em;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.01em;
+    margin-bottom: 4px;
+}
+
+.stat-label {
+    font-size: 0.85em;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+/* =============================================
+   ENTRIES (research, leadership, athletics)
+   ============================================= */
+.entries {
+    max-width: 760px;
+}
+
+.entries li {
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.entries li:first-child {
+    padding-top: 4px;
+}
+
+.entries li:last-child {
+    border-bottom: none;
+}
+
+.entry-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 4px 16px;
+    margin-bottom: 6px;
+}
+
+.entry-head h3 {
+    font-size: 1em;
+}
+
+.entry-meta {
+    font-size: 0.82em;
+    color: var(--text-muted);
+}
+
+.entries p {
+    font-size: 0.93em;
+}
+
+.entries p a {
+    font-weight: 500;
 }
 
 /* =============================================
@@ -281,6 +361,8 @@ header nav a:hover {
 .tag-bio    { background: #f0fdf4; color: #166534; }
 .tag-web    { background: #fff7ed; color: #9a3412; }
 .tag-python { background: #faf5ff; color: #6b21a8; }
+.tag-data   { background: #fdf2f8; color: #9d174d; }
+.tag-sports { background: #ecfeff; color: #0e7490; }
 
 /* =============================================
    SHOW MORE
@@ -293,7 +375,7 @@ header nav a:hover {
 }
 
 .more-projects.expanded {
-    max-height: 800px;
+    max-height: 4000px;
     opacity: 1;
 }
 
@@ -498,4 +580,35 @@ header nav a:hover {
 
 .back-link:hover {
     color: var(--accent);
+}
+
+/* =============================================
+   SMALL SCREENS
+   ============================================= */
+@media (max-width: 640px) {
+    header {
+        padding: 40px 16px 32px;
+    }
+
+    .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    header h1 {
+        font-size: 1.9em;
+    }
+
+    header nav {
+        gap: 8px 18px;
+    }
+
+    .container {
+        padding: 0 16px;
+    }
+
+    section {
+        padding: 56px 0;
+    }
 }

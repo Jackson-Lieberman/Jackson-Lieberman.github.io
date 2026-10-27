@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jackson Lieberman</title>
+    <meta name="description" content="Jackson Lieberman: high school researcher and builder working at the intersection of chemistry, AI, and plastics recycling.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -15,10 +16,13 @@
             <img src="images/Lieberman_Jackson.jpg" alt="Jackson Lieberman" class="headshot">
             <div class="header-text">
                 <h1>Jackson Lieberman</h1>
-                <p class="subtitle">10th Grade · Greenwich Country Day School · Chemical Engineering</p>
+                <p class="subtitle">Senior · Greenwich Country Day School · Chemical Engineering, AI &amp; Plastics Recycling</p>
                 <nav>
                     <a href="#about">About</a>
                     <a href="#projects">Projects</a>
+                    <a href="#research">Research</a>
+                    <a href="#leadership">Leadership</a>
+                    <a href="#athletics">Athletics</a>
                     <a href="#contact">Contact</a>
                 </nav>
             </div>
@@ -29,7 +33,15 @@
         <section id="about">
             <div class="about-body">
                 <span class="section-label">About</span>
-                <p>I'm a high school student passionate about AI, machine learning, and chemical engineering. I enjoy building projects that combine cutting-edge technology with real-world problems, from computationally engineering thermostable enzymes to building multi-agent AI systems.</p>
+                <p>I'm a high school senior working where chemistry, machine learning, and engineering meet. For the past two years I've been engineering more heat-stable variants of FAST-PETase, an enzyme that breaks down plastic, first in simulation and now in a wet lab. Running that design-test-repeat loop by hand showed me the real bottleneck isn't the chemistry but the slow pace of testing, so I want to build AI systems that tell scientists which proteins are worth making.</p>
+                <p>Outside the lab I build software (including SquashLab, a computer-vision squash coaching app), work on local policy through the Greenwich First Selectman's Youth Commission, and coach and play squash. I plan to study Chemical Engineering in college.</p>
+            </div>
+
+            <div class="stats">
+                <div class="stat"><span class="stat-num">ChemRxiv</span><span class="stat-label">preprint on thermostable PETase design</span></div>
+                <div class="stat"><span class="stat-num">1,000+</span><span class="stat-label">SquashLab downloads in the first month</span></div>
+                <div class="stat"><span class="stat-num">~50</span><span class="stat-label">students from 9 schools taught AI for finance</span></div>
+                <div class="stat"><span class="stat-num">CSEF</span><span class="stat-label">Finalist &amp; First Honors</span></div>
             </div>
         </section>
 
@@ -43,10 +55,37 @@
                         <img src="images/trip.png" alt="Triple disulfide FAST-PETase structure in PyMOL">
                     </div>
                     <div class="card-body">
-                        <span class="tag tag-chem">Chemical Engineering</span>
+                        <span class="tag tag-chem">Computational Chemistry</span>
                         <h3><a href="thermostable-petase.html">Thermostable PETase Design</a></h3>
-                        <p>Computationally engineered disulfide bonds into FAST-PETase using PyMOL and MD simulations, achieving a 50–70 °C stable temperature window for enzymatic PET depolymerization.</p>
+                        <p>Engineered disulfide bonds into FAST-PETase and tested 8 variants with molecular dynamics. The best variant stayed stable from 50 to 70 °C. Written up as a ChemRxiv preprint; CSEF Finalist.</p>
                         <a href="thermostable-petase.html" class="card-link">Read more →</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="card-body">
+                        <span class="tag tag-sports">Founder · iOS / Computer Vision</span>
+                        <h3><a href="squashlab.html">SquashLab</a></h3>
+                        <p>An app I founded that scores squash swing technique from a phone video and coaches the player. Over 1,000 downloads in its first month; I reached out to 100+ professional players.</p>
+                        <a href="squashlab.html" class="card-link">Read more →</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="card-body">
+                        <span class="tag tag-bio">Wet Lab · GenSpace</span>
+                        <h3><a href="lab-petase.html">Wet-Lab PETase Validation</a></h3>
+                        <p>Taking my simulated variants into the lab at GenSpace in Brooklyn: expressing and purifying them in E. coli, then measuring whether they hold up at higher temperatures.</p>
+                        <a href="lab-petase.html" class="card-link">Read more →</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="card-img">
+                        <img src="images/gfs.jpg" alt="Jackson presenting at the Greenwich Finance Series">
+                    </div>
+                    <div class="card-body">
+                        <span class="tag tag-ai">AI / Teaching</span>
+                        <h3><a href="gfs.html">Greenwich Finance &amp; AI Series</a></h3>
+                        <p>Co-organized a workshop at Greenwich Town Hall where nearly 50 students from 9 schools built their own AI stock-prediction agent, alongside two J.P. Morgan VPs and a private equity founder.</p>
+                        <a href="gfs.html" class="card-link">Read more →</a>
                     </div>
                 </div>
                 <div class="project-card">
@@ -56,19 +95,15 @@
                     <div class="card-body">
                         <span class="tag tag-ai">AI / Multi-Agent</span>
                         <h3><a href="geo.html">GeoSolvr</a></h3>
-                        <p>Multi-agent AI system that solves GeoGuessr using an image URL, using specialized agents for image analysis, language detection, and geographic reasoning.</p>
+                        <p>A multi-agent AI system, built in a team of four, that locates GeoGuessr images using agents for image analysis, language detection, and geographic reasoning. Studied by Canada's national GeoGuessr team.</p>
                         <a href="geo.html" class="card-link">Read more →</a>
                     </div>
                 </div>
                 <div class="project-card">
-                    <div class="card-img">
-                        <img src="images/gfs.jpg" alt="Jackson presenting at Greenwich Finance Series">
-                    </div>
                     <div class="card-body">
-                        <span class="tag tag-ai">AI / Finance</span>
-                        <h3><a href="gfs.html">Greenwich Finance Series</a></h3>
-                        <p>Co-organized and led the AI section of a 40+ student finance &amp; AI workshop at Greenwich Town Hall. Built and demoed a live stock prediction agent hands-on.</p>
-                        <a href="gfs.html" class="card-link">Read more →</a>
+                        <span class="tag tag-chem">Research · UPenn</span>
+                        <h3>Lignin as Sustainable Jet Fuel</h3>
+                        <p>Led a group of three high schoolers studying lignin as a jet-fuel source using FTIR, calorimetry, and regression analysis. Presented at the Chemistry Symposium at UPenn.</p>
                     </div>
                 </div>
             </div>
@@ -77,13 +112,29 @@
             <div class="more-projects" id="moreProjects">
                 <div class="projects-grid">
                     <div class="project-card">
+                        <div class="card-body">
+                            <span class="tag tag-data">Data / Humanities</span>
+                            <h3><a href="constituting-education.html">Constituting Education</a></h3>
+                            <p>Topic modeling (STM, keyATM, BERTopic) of national education documents across about ten countries, testing whether "human capital" language has displaced civic and humanistic ideas of what school is for.</p>
+                            <a href="constituting-education.html" class="card-link">Read more →</a>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="card-body">
+                            <span class="tag tag-ai">AI / Chemistry</span>
+                            <h3><a href="quanta-bricks.html">Quanta Bricks (ChemOrchestra)</a></h3>
+                            <p>Research intern: supplied data from my PETase research to benchmark ChemOrchestra, a computational chemistry platform, and helped plan its first bio-hackathon.</p>
+                            <a href="quanta-bricks.html" class="card-link">Read more →</a>
+                        </div>
+                    </div>
+                    <div class="project-card">
                         <div class="card-img">
                             <img src="images/bcm-alphafold.png" alt="BCM_v2 AlphaFold structure">
                         </div>
                         <div class="card-body">
-                            <span class="tag tag-chem">Chemical Engineering</span>
+                            <span class="tag tag-chem">Protein Design</span>
                             <h3><a href="blend-cleaver-mini.html">Blend-Cleaver-Mini</a></h3>
-                            <p>A modular fusion enzyme that depolymerizes PET blends and adhesive-laminates, designed using AlphaFold.</p>
+                            <p>A modular fusion enzyme, designed with AlphaFold, for breaking down PET blends and adhesive laminates.</p>
                             <a href="blend-cleaver-mini.html" class="card-link">Read more →</a>
                         </div>
                     </div>
@@ -93,25 +144,25 @@
                         </div>
                         <div class="card-body">
                             <span class="tag tag-ai">AI / ML</span>
-                            <h3><a href="https://jackson-lieberman.github.io/cleancrop/" target="_blank">CleanCrop.AI</a></h3>
-                            <p>An AI-based tool for identifying plant diseases.</p>
+                            <h3><a href="https://jackson-lieberman.github.io/cleancrop/" target="_blank" rel="noopener">CleanCrop.AI</a></h3>
+                            <p>A convolutional neural network in Python and TensorFlow that identifies crop diseases and suggests treatments, motivated by research on crop disease and world hunger.</p>
+                            <a href="https://jackson-lieberman.github.io/cleancrop/" target="_blank" rel="noopener" class="card-link">Try it →</a>
                         </div>
                     </div>
                     <div class="project-card">
-                        <div class="card-img">
-                            <img src="images/rps-game.png" alt="Rock Paper Scissors game screenshot">
-                        </div>
                         <div class="card-body">
-                            <span class="tag tag-web">Web</span>
-                            <h3><a href="https://jackson-lieberman.github.io/rockpaperscissors/" target="_blank">Rock Paper Scissors</a></h3>
-                            <p>Rock Paper Scissors built using HTML and JavaScript.</p>
+                            <span class="tag tag-data">Python / Data</span>
+                            <h3><a href="shakespeare-analysis.html">Shakespeare Text Analysis</a></h3>
+                            <p>Python programs that measure word frequency and themes (love, power, revenge, hate) across 20+ plays, with CSV output and matplotlib charts.</p>
+                            <a href="shakespeare-analysis.html" class="card-link">Read more →</a>
                         </div>
                     </div>
                     <div class="project-card">
                         <div class="card-body">
                             <span class="tag tag-python">Python</span>
-                            <h3><a href="https://jackson-lieberman.github.io/dimentionalanalysis/" target="_blank">Dimensional Analysis Calculator</a></h3>
-                            <p>Dimensional analysis calculator built in Python for chemistry class.</p>
+                            <h3><a href="https://jackson-lieberman.github.io/dimentionalanalysis/" target="_blank" rel="noopener">Dimensional Analysis Calculator</a></h3>
+                            <p>A dimensional analysis calculator built in Python for chemistry class.</p>
+                            <a href="https://jackson-lieberman.github.io/dimentionalanalysis/" target="_blank" rel="noopener" class="card-link">Try it →</a>
                         </div>
                     </div>
                 </div>
@@ -120,12 +171,86 @@
             <button class="show-more-btn" id="showMoreBtn" onclick="toggleMore()">View all projects ↓</button>
         </section>
 
-<section id="contact">
+        <section id="research">
+            <span class="section-label">Research Experience</span>
+            <ul class="entries">
+                <li>
+                    <div class="entry-head"><h3>Independent Researcher, Thermostable PETase</h3><span class="entry-meta">Grades 11–12</span></div>
+                    <p>Self-taught, self-directed project computationally engineering more thermostable PETase variants with disulfide bonds. Wrote a ChemRxiv preprint and built a network of mentors, including members of the BOTTLE Consortium. <a href="thermostable-petase.html">Project page →</a></p>
+                </li>
+                <li>
+                    <div class="entry-head"><h3>RAIL Lab, University of the Witwatersrand</h3><span class="entry-meta">Johannesburg · Winter, Grade 11</span></div>
+                    <p>Ran computational PETase research and built machine-learning approaches to protein prediction under Dr. Benjamin Rosman at the Robotics, Autonomous Intelligence and Learning Lab.</p>
+                </li>
+                <li>
+                    <div class="entry-head"><h3>GenSpace Community Bio Lab</h3><span class="entry-meta">Brooklyn, NY · Grade 12</span></div>
+                    <p>Validating my simulated PETase variants at the bench: expression, purification, and stability testing. <a href="lab-petase.html">Project page →</a></p>
+                </li>
+                <li>
+                    <div class="entry-head"><h3>Research Intern, Quanta Bricks (ChemOrchestra)</h3><span class="entry-meta">Grades 11–12</span></div>
+                    <p>Provided research data to benchmark ChemOrchestra's models and helped plan the company's first bio-hackathon. <a href="quanta-bricks.html">Project page →</a></p>
+                </li>
+                <li>
+                    <div class="entry-head"><h3>Lignin Research, UPenn</h3><span class="entry-meta">Grades 11–12</span></div>
+                    <p>Led a team of three studying lignin as sustainable jet fuel (FTIR, calorimetry, regression); presented at the UPenn Chemistry Symposium.</p>
+                </li>
+            </ul>
+        </section>
+
+        <section id="leadership">
+            <span class="section-label">Leadership &amp; Community</span>
+            <ul class="entries">
+                <li>
+                    <div class="entry-head"><h3>CT Disposable Vape Ban, Commission Leader</h3><span class="entry-meta">First Selectman's Youth Commission · Grades 11–12</span></div>
+                    <p>Led a group of 15 to draft a bill for a statewide ban on disposable vapes, which are plastic, chemical, and e-waste all at once, paired with youth education. Met with state representatives, presented at a state legislative forum, and built a subcommittee to carry the bill into the next legislative cycle.</p>
+                </li>
+                <li>
+                    <div class="entry-head"><h3>Greenwich Finance &amp; AI Series, Co-Organizer</h3><span class="entry-meta">First Selectman's Youth Commission · Grades 10–11</span></div>
+                    <p>Helped turn a finance course into a finance-and-AI workshop and taught agentic stock prediction to nearly 50 students from 9 schools. <a href="gfs.html">Event page →</a></p>
+                </li>
+                <li>
+                    <div class="entry-head"><h3>Cops &amp; Tots, Commission Leader</h3><span class="entry-meta">First Selectman's Youth Commission · 2026</span></div>
+                    <p>Led 10 students in creating a community event that connects young kids with local police.</p>
+                </li>
+                <li>
+                    <div class="entry-head"><h3>GCDS Research Program Planning</h3><span class="entry-meta">Greenwich Country Day School · Grades 10–11</span></div>
+                    <p>Worked with administrators to redesign the school's research program, from course design to events, and helped teach classes.</p>
+                </li>
+                <li>
+                    <div class="entry-head"><h3>Waste Free Greenwich, Presenter &amp; Social Media Intern</h3><span class="entry-meta">Grades 11–12</span></div>
+                    <p>Built a year-round content calendar for a local waste-reduction nonprofit, helped plan the ReThink Waste Fair, and presented my plastics research there. <a href="waste-free-greenwich.html">More →</a></p>
+                </li>
+            </ul>
+        </section>
+
+        <section id="athletics">
+            <span class="section-label">Athletics &amp; Coaching</span>
+            <ul class="entries">
+                <li>
+                    <div class="entry-head"><h3>Varsity Squash</h3><span class="entry-meta">Greenwich Country Day School · Grades 9–12</span></div>
+                    <p>Helped rebuild the program after a last-place finish at High School Nationals, growing the roster from 7 players to a full team with competitive tryouts. Led preseason coaching and training; seeded as high as #2.</p>
+                </li>
+                <li>
+                    <div class="entry-head"><h3>Squash &amp; Padel Coach</h3><span class="entry-meta">Field Club of Greenwich · Summers</span></div>
+                    <p>Lead coach for groups of 10 kids at a time (about 100 a day, ages 5–14); designed drills for skill and strength. Received the Coaches Award.</p>
+                </li>
+                <li>
+                    <div class="entry-head"><h3>Club Champion, Boys U17</h3><span class="entry-meta">Grades 10–11</span></div>
+                    <p>Defended the title two years in a row, undefeated.</p>
+                </li>
+                <li>
+                    <div class="entry-head"><h3>Varsity Soccer · Lifeguard</h3><span class="entry-meta">Grade 12 · Summers 2024–2026</span></div>
+                    <p>Left back for GCDS varsity soccer. American Red Cross certified lifeguard (CPR/AED, First Aid).</p>
+                </li>
+            </ul>
+        </section>
+
+        <section id="contact">
             <span class="section-label">Contact</span>
             <p>
                 Email: jacksonslieberman at gmail dot com<br>
-                GitHub: <a href="https://github.com/Jackson-Lieberman" target="_blank">github.com/Jackson-Lieberman</a><br>
-                LinkedIn: <a href="https://www.linkedin.com/in/jackson-lieberman-a34aa6330/" target="_blank">linkedin.com/in/jackson-lieberman</a>
+                GitHub: <a href="https://github.com/Jackson-Lieberman" target="_blank" rel="noopener">github.com/Jackson-Lieberman</a><br>
+                LinkedIn: <a href="https://www.linkedin.com/in/jackson-lieberman-a34aa6330/" target="_blank" rel="noopener">linkedin.com/in/jackson-lieberman</a>
             </p>
         </section>
     </div>

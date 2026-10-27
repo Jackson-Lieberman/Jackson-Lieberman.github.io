@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shakespeare Text Analysis - Jackson Lieberman</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+<body>
+    <header>
+        <div class="header-inner">
+            <div class="header-text">
+                <h1>Shakespeare Text Analysis</h1>
+                <p class="subtitle">Python programs that quantify word frequency and thematic language across Shakespeare's plays</p>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="content-section">
+            <h2>Project Overview</h2>
+            <p style="text-align: center;">
+                A pair of Python programs that turn Shakespeare's plays into data. The first measures the most frequent
+                words in any single play; the second scores curated thematic vocabularies — Love, Power, Revenge, and Hate —
+                across entire genres to compare how comedies, tragedies, and histories use language differently.
+                Both run over a corpus of 20+ full play texts and produce CSV data and charts.
+            </p>
+        </section>
+
+        <section class="content-section">
+            <h2>Two Programs</h2>
+            <ul>
+                <li><strong>Word-frequency analyzer:</strong> the user picks a play; the program tokenizes and cleans the text, builds a word&nbsp;→&nbsp;count dictionary, ranks the top 15 words, writes them to a CSV, and renders a pie chart of the results as a PDF.</li>
+                <li><strong>Thematic analyzer:</strong> starts from hand-built keyword sets for four themes (Love, Power, Revenge, Hate), then counts how often each theme's vocabulary appears across a chosen genre (Comedies, Tragedies, or Histories). It reports the theme distribution and the top thematic words as a CSV plus a two-panel figure — a bar chart of theme totals and a pie chart of the leading words.</li>
+            </ul>
+        </section>
+
+        <section class="content-section">
+            <h2>How It Works</h2>
+            <ul>
+                <li>Reads raw play texts, then lowercases and strips punctuation with <code>string</code> and <code>re</code> so words are counted consistently.</li>
+                <li>Uses Python dictionaries to accumulate counts, and <code>sorted()</code> with a lambda key to rank results.</li>
+                <li>Organizes the corpus by genre so thematic comparisons are made across comparable groups of plays.</li>
+                <li>Exports results with the <code>csv</code> module and visualizes them with <code>matplotlib</code>, saving publication-ready PDF charts.</li>
+            </ul>
+        </section>
+
+        <section class="content-section">
+            <h2>Tools &amp; Technologies</h2>
+            <ul>
+                <li>Python — text processing and analysis</li>
+                <li><code>string</code> &amp; <code>re</code> — tokenization and cleaning</li>
+                <li><code>csv</code> — structured data export</li>
+                <li><code>matplotlib</code> — bar and pie chart visualization</li>
+            </ul>
+        </section>
+
+        <section class="content-section">
+            <h2>What I Learned</h2>
+            <ul>
+                <li>How dictionaries and sorting make short work of counting and ranking over large bodies of text.</li>
+                <li>That the interesting design choice in thematic analysis is the keyword set — building good vocabularies for abstract themes is harder than the counting itself.</li>
+                <li>How to move from raw text to clean CSV data to a readable chart in one pipeline.</li>
+            </ul>
+        </section>
+
+        <section class="content-section">
+            <h2>Source Code</h2>
+            <p style="text-align:center;">
+                <a href="https://github.com/Jackson-Lieberman/CS2" target="_blank">View the code on GitHub →</a>
+            </p>
+        </section>
+
+        <section>
+            <a href="index.html" class="back-link">← Back to Portfolio</a>
+        </section>
+    </div>
+</body>
+</html>

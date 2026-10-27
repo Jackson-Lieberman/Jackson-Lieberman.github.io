@@ -11,8 +11,12 @@
 </head>
 <body>
     <header>
-        <h1>GeoSolvr</h1>
-        <p>A multi-agent AI system that solves GeoGuessr using an image URL, developed by Jackson Lieberman.</p>
+        <div class="header-inner">
+            <div class="header-text">
+                <h1>GeoSolvr</h1>
+                <p class="subtitle">A multi-agent AI system that locates GeoGuessr images · Built in a team of four</p>
+            </div>
+        </div>
     </header>
 
     <div class="container">
@@ -21,6 +25,7 @@
             <p style="text-align: center;">
                 GeoSolvr is a multi-agent AI system that takes a GeoGuessr image URL and determines the location depicted.<br>
                 Multiple specialized agents work together to analyze visual clues and reason about geography.
+                I built it with a team of four during an intensive three-week sprint, and Canada's national GeoGuessr team has studied it.
             </p>
         </section>
 
@@ -29,6 +34,7 @@
             <ul>
                 <li>Multi-agent architecture with specialized reasoning agents.</li>
                 <li>Analyzes visual cues like road signs, architecture, and vegetation.</li>
+                <li>Separate agents for image analysis, language detection on signs and text, and geographic reasoning.</li>
                 <li>Accepts a standard image URL as input.</li>
                 <li>Returns a predicted country and location with reasoning.</li>
             </ul>
@@ -46,7 +52,7 @@
 
         <section class="content-section">
             <h2>View the Code</h2>
-            <p>
+            <p style="text-align: center;">
                 The full source code is available on
                 <a href="https://github.com/Jackson-Lieberman" target="_blank">GitHub</a>.
             </p>

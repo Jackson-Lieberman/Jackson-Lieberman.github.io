@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SquashLab - Jackson Lieberman</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+<body>
+    <header>
+        <div class="header-inner">
+            <div class="header-text">
+                <h1>SquashLab</h1>
+                <p class="subtitle">Founder &amp; CEO · An iOS app that turns a phone video of your squash swing into coach-style feedback</p>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="content-section">
+            <div style="text-align:center;"><div class="award-banner">
+                <span class="award-icon">📈</span>
+                <span>1,000+ downloads in the first month</span>
+            </div></div>
+        </section>
+
+        <section class="content-section">
+            <h2>Project Overview</h2>
+            <p style="text-align: center;">
+                SquashLab is an iOS app that analyzes a squash player's swing from a single phone video and returns
+                coaching feedback — no sensors, no wearables. A player films a rally, the app detects each swing,
+                measures body and racket mechanics through the swing, and scores it. Under the hood it combines
+                pose estimation with a self-trained racket-detection model and a multi-signal shot splitter, running
+                heavier inference in the cloud while capturing high-frame-rate video on-device.
+            </p>
+        </section>
+
+        <section class="content-section">
+            <h2>How It Works</h2>
+            <ul>
+                <li><strong>Capture:</strong> the iOS app records high-frame-rate video on-device and normalizes every upload to a consistent frame rate so downstream analysis stays stable.</li>
+                <li><strong>Shot splitting:</strong> a multi-signal splitter fuses wrist speed, racket position, and audio (the sound of ball contact) to segment a rally into individual swings — replacing a fragile fixed-window approach.</li>
+                <li><strong>Pose &amp; racket tracking:</strong> a body-pose model plus a custom-trained racket detector locate the player and racket frame by frame.</li>
+                <li><strong>Metrics:</strong> phase-based mechanics (body rotation, knee bend, contact point) are measured at the meaningful moments of each swing.</li>
+                <li><strong>Scoring &amp; feedback:</strong> a Swing Score and Session Score summarize performance, presented in a coach's tone rather than as raw numbers.</li>
+            </ul>
+        </section>
+
+        <section class="content-section">
+            <h2>Engineering Highlights</h2>
+            <ul>
+                <li>Trained a custom <strong>RF-DETR racket-detection model</strong> and validated it against a hand-labeled ground-truth set, where it outperformed the previous YOLO-based detector.</li>
+                <li>Built a <strong>multi-signal shot splitter</strong> (motion + racket + audio contact) to reliably isolate swings, the hardest part of the pipeline.</li>
+                <li>Diagnosed weak racket detection as a <strong>capture problem</strong> (motion blur and low frame rate) rather than a model problem, and fixed it with higher-fps capture and blur augmentation.</li>
+                <li>Designed a <strong>data flywheel</strong>: uploads feed a labeling loop that continuously improves the models.</li>
+                <li>Shipped an <strong>end-to-end production pipeline</strong> — on-device capture, cloud GPU inference, and results delivered back to the phone with live progress updates.</li>
+            </ul>
+        </section>
+
+        <section class="content-section">
+            <h2>Tools &amp; Technologies</h2>
+            <ul>
+                <li>Swift / SwiftUI — native iOS app (on-device capture, results UI, live progress)</li>
+                <li>Python — computer-vision pipeline (pose estimation, shot splitting, metrics)</li>
+                <li>RF-DETR &amp; YOLO — racket detection (custom-trained and validated)</li>
+                <li>MediaPipe — body-pose estimation</li>
+                <li>Modal — GPU-backed cloud inference</li>
+                <li>Fly.io — pipeline / API server</li>
+                <li>Supabase — backend, authentication (Sign in with Apple), and data</li>
+            </ul>
+        </section>
+
+        <section class="content-section">
+            <h2>What I Learned</h2>
+            <ul>
+                <li>That data quality and capture conditions often matter more than model architecture — the biggest wins came from better video, not bigger models.</li>
+                <li>How to validate a model against real ground truth instead of trusting benchmark metrics, and how to retire features that ground truth showed weren't working.</li>
+                <li>How to design a full ML product: mobile capture, cloud inference, storage, auth, and a feedback loop that keeps improving the models.</li>
+                <li>How to collaborate on a shared codebase with disciplined version control.</li>
+                <li>How to grow a product: I reached out to more than 100 professional players for feedback and promotion.</li>
+            </ul>
+        </section>
+
+        <section>
+            <a href="index.html" class="back-link">← Back to Portfolio</a>
+        </section>
+    </div>
+</body>
+</html>
