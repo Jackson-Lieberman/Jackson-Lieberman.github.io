@@ -343,6 +343,21 @@ header nav a:hover {
     gap: 8px;
 }
 
+.card-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 20px;
+}
+
+a.stat {
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+a.stat:hover {
+    border-color: var(--accent);
+    box-shadow: var(--shadow-md);
+}
+
 /* =============================================
    TAGS
    ============================================= */
