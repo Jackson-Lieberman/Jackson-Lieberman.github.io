@@ -178,34 +178,6 @@ header nav a:hover {
     margin-top: 16px;
 }
 
-.stats {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 16px;
-    margin-top: 40px;
-}
-
-.stat {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 18px 20px;
-}
-
-.stat-num {
-    display: block;
-    font-size: 1.5em;
-    font-weight: 700;
-    color: var(--text);
-    letter-spacing: -0.01em;
-    margin-bottom: 4px;
-}
-
-.stat-label {
-    font-size: 0.85em;
-    color: var(--text-muted);
-    line-height: 1.5;
-}
 
 /* =============================================
    ENTRIES (research, leadership, athletics)
@@ -347,15 +319,6 @@ header nav a:hover {
     display: flex;
     flex-wrap: wrap;
     gap: 6px 20px;
-}
-
-a.stat {
-    transition: border-color 0.2s, box-shadow 0.2s;
-}
-
-a.stat:hover {
-    border-color: var(--accent);
-    box-shadow: var(--shadow-md);
 }
 
 /* =============================================
