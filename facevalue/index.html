@@ -1,0 +1,944 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="A 4-minute anonymous survey by Greenwich Country Day School students, in partnership with L’Oréal Luxe.">
+<meta name="robots" content="noindex">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Face Value · GCDS × L’Oréal Luxe">
+<meta property="og:description" content="A 4-minute anonymous survey by Greenwich Country Day School students, in partnership with L’Oréal Luxe.">
+<meta property="og:image" content="https://jacksonlieberman.me/facevalue/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<script src="config.js"></script>
+<title>Face Value</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Libre+Caslon+Display&display=swap">
+<style>
+/* Layout: one question per screen in a centered 720px column. A thin bar under the
+   header fills left to right through a skin-tone shade range as questions are answered. */
+:root{
+  --bg:#F4F4F1; --surface:#FFFFFF; --panel:#E9E7E2; --ink:#111214; --ink-2:#5C5E62; --line:#DCDCD7;
+  --accent:#1D3557; --accent-ink:#FFFFFF; --tint:#E6EBF2; --metal:#A88B5C; --lip:#A85D55;
+  --t1:#F1D3BE; --t2:#E2B597; --t3:#C98F6B; --t4:#A26B4A; --t5:#6E4630; --t6:#43291C;
+  --serif:"Libre Caslon Display","Big Caslon","Didot",Georgia,serif;
+  --sans:"Instrument Sans","Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#111214; --surface:#1A1B1E; --panel:#1F2024; --ink:#F1F1EE; --ink-2:#A2A4A8; --line:#2E2F33;
+    --accent:#9DB6D6; --accent-ink:#0D1420; --tint:#1C2533; --metal:#B79A6A; --lip:#C27A70; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#111214; --surface:#1A1B1E; --panel:#1F2024; --ink:#F1F1EE; --ink-2:#A2A4A8; --line:#2E2F33;
+  --accent:#9DB6D6; --accent-ink:#0D1420; --tint:#1C2533; --metal:#B79A6A; --lip:#C27A70; color-scheme:dark;
+}
+html,body{margin:0;height:100%}
+.app{min-height:100%;display:flex;flex-direction:column}
+.app>main{flex:1 0 auto}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.wrap{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+
+/* illustration pigments */
+.c-ink{fill:var(--ink)} .c-surf{fill:var(--surface)} .c-panel{fill:var(--panel)} .c-line{fill:var(--line)}
+.c-metal{fill:var(--metal)} .c-lip{fill:var(--lip)} .c-acc{fill:var(--accent)}
+.c-t1{fill:var(--t1)} .c-t2{fill:var(--t2)} .c-t3{fill:var(--t3)} .c-t4{fill:var(--t4)} .c-t5{fill:var(--t5)} .c-t6{fill:var(--t6)}
+.c-ring{fill:none;stroke:var(--ink-2);stroke-width:2.5;stroke-dasharray:4 5}
+.c-label{fill:var(--ink-2);font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.1em}
+
+.preview-band{background:var(--ink);color:var(--bg);font-size:13px;padding-block:8px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-wrap:wrap;gap:4px 16px;justify-content:center}
+.preview-band a{color:inherit}
+
+.top{background:var(--surface);border-bottom:1px solid var(--line)}
+.top-in{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:16px}
+.mark{font-family:var(--serif);font-size:24px;line-height:1;letter-spacing:.01em}
+.partner{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);text-align:right}
+.progress{height:4px;background:var(--line)}
+.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--t1),var(--t2),var(--t3),var(--t4),var(--t5),var(--t6));background-size:100vw 100%;transition:width .35s ease}
+.app[data-view="intro"] .progress,.app[data-view="end"] .progress{visibility:hidden}
+
+.stage{padding-block:40px 64px}
+@media (min-width:760px){.stage{padding-block:64px 88px}}
+.col-q{max-width:720px;margin:0 auto}
+
+/* type */
+.label{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);margin:0 0 12px}
+.label .n{color:var(--accent)}
+.q-title{font-weight:600;font-size:clamp(26px,4vw,36px);line-height:1.15;letter-spacing:-.015em;margin:0;text-wrap:balance;outline:none}
+.q-help{color:var(--ink-2);margin:10px 0 0;max-width:60ch}
+.answers{margin-top:28px}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:32px;flex-wrap:wrap}
+.nav-right{display:flex;align-items:center;gap:16px;margin-left:auto}
+.count{font-size:13px;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.count.warn{color:var(--lip)}
+
+.btn{border:0;cursor:pointer;font-weight:600;font-size:16px;line-height:1;padding:15px 26px;border-radius:8px;transition:opacity .2s,transform .1s}
+.btn:active{transform:translateY(1px)}
+.primary{background:var(--accent);color:var(--accent-ink)}
+.primary:disabled{opacity:.3;cursor:not-allowed;transform:none}
+.secondary{background:var(--surface);color:var(--ink);border:1px solid var(--line)}
+.text-btn{background:none;border:0;color:var(--ink-2);cursor:pointer;padding:8px 0;font-size:15px;text-decoration:underline;text-underline-offset:4px}
+
+/* option cards with illustrations */
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+@media (min-width:600px){.cards{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.card{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:12px;padding:16px;background:var(--surface);border:1px solid var(--line);border-radius:10px;text-align:left;font-weight:500;font-size:15px;line-height:1.3;cursor:pointer;transition:border-color .15s,background .15s;min-width:0}
+.card svg{width:52px;height:52px;flex:none}
+.card small{display:block;font-weight:400;font-size:13px;color:var(--ink-2);margin-top:2px}
+.card:hover{border-color:var(--ink-2)}
+.card[aria-pressed="true"]{border-color:var(--accent);background:var(--tint);box-shadow:inset 0 0 0 1px var(--accent)}
+.tick{position:absolute;top:10px;right:10px;width:20px;height:20px;border-radius:4px;background:var(--accent);color:var(--accent-ink);display:none;place-items:center}
+.tick svg{width:12px;height:12px}
+[aria-pressed="true"]>.tick{display:grid}
+.cards.check{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (min-width:600px){.cards.check{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.cards.check .card{align-items:center;padding:22px 10px}
+.cards.check .card svg{width:68px;height:68px}
+
+/* frequency rows */
+.rows{display:grid;gap:8px}
+.rows .card{flex-direction:row;align-items:center;justify-content:space-between;gap:16px;padding:16px 18px;font-size:16px}
+.dots{display:flex;gap:4px;justify-content:flex-end}
+.dots i{width:9px;height:9px;border-radius:50%;box-shadow:inset 0 0 0 1.5px var(--line);display:block}
+.dots i.f{background:var(--accent);box-shadow:none}
+.dots i.x{box-shadow:inset 0 0 0 1.5px var(--ink-2)}
+.dots-label{display:block;font-size:12px;color:var(--ink-2);margin-top:5px;text-align:right}
+
+/* choices */
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{padding:12px 16px;border-radius:8px;border:1px solid var(--line);background:var(--surface);font-weight:500;font-size:15px;line-height:1.25;cursor:pointer;text-align:left;transition:background .15s,border-color .15s}
+.chip:hover{border-color:var(--ink-2)}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.chips.stack{flex-direction:column;align-items:stretch}
+.chips.stack .chip{padding:15px 18px;font-size:16px}
+.group+.group{margin-top:28px}
+.shake{animation:shake .3s}
+@keyframes shake{25%{transform:translateX(-3px)}75%{transform:translateX(3px)}}
+
+/* which best describes you */
+.pairs{display:grid;gap:12px}
+.pair{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--surface)}
+.pair button{border:0;background:none;cursor:pointer;padding:20px 14px;text-align:center;font-weight:600;font-size:17px;line-height:1.2;transition:background .15s,color .15s}
+.pair button:first-child{border-right:1px solid var(--line)}
+.pair button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+
+/* price */
+.price-read{font-family:var(--serif);font-size:clamp(56px,11vw,88px);line-height:1;margin:0;font-variant-numeric:tabular-nums}
+.price-read small{font-family:var(--sans);font-size:15px;color:var(--ink-2);margin-left:8px}
+.range{width:100%;margin:22px 0 10px;-webkit-appearance:none;appearance:none;height:6px;border-radius:3px;background:linear-gradient(90deg,var(--accent) var(--p,30%),var(--line) var(--p,30%));outline-offset:8px}
+.range::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:26px;height:26px;border-radius:50%;background:var(--surface);border:2px solid var(--accent);box-shadow:0 1px 3px rgba(0,0,0,.25);cursor:grab}
+.range::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--surface);border:2px solid var(--accent);box-shadow:0 1px 3px rgba(0,0,0,.25);cursor:grab}
+.ticks{display:flex;justify-content:space-between;font-size:13px;color:var(--ink-2);font-variant-numeric:tabular-nums}
+
+/* 1-5 scale */
+.scale{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+.scale button{display:flex;flex-direction:column;align-items:center;gap:8px;padding:14px 4px 12px;border:1px solid var(--line);border-radius:10px;background:var(--surface);cursor:pointer;font-size:13px;font-weight:500;line-height:1.2;text-align:center}
+.scale b{font-family:var(--serif);font-weight:400;font-size:24px;line-height:1}
+.scale button[aria-pressed="true"]{border-color:var(--accent);background:var(--accent);color:var(--accent-ink)}
+
+.concept{display:grid;gap:18px;margin-top:24px}
+.art{border-radius:12px;overflow:hidden;line-height:0;background:var(--panel)}
+.art svg{width:100%;height:auto;display:block}
+.concept-copy{font-size:17px;max-width:60ch;margin:0}
+
+.field{width:100%;padding:14px 16px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font:500 17px/1.3 var(--sans)}
+.field:focus{border-color:var(--accent);outline:none;box-shadow:0 0 0 1px var(--accent)}
+textarea.field{min-height:130px;resize:vertical;line-height:1.45}
+.stack-gap{display:grid;gap:14px}
+.hint{font-size:14px;color:var(--ink-2);margin:8px 0 0}
+
+/* cover */
+.intro{display:grid;gap:32px;align-items:center}
+@media (min-width:880px){.intro{grid-template-columns:minmax(0,1fr) minmax(0,.95fr);gap:64px}}
+.intro-title{font-family:var(--serif);font-weight:400;font-size:clamp(34px,4.6vw,52px);line-height:1.08;letter-spacing:-.005em;margin:0;text-wrap:balance}
+.lede{font-size:17px;max-width:50ch;margin:18px 0 0;color:var(--ink)}
+.facts{list-style:none;padding:0;margin:22px 0 26px;display:flex;flex-wrap:wrap;gap:8px}
+.facts li{font-size:14px;font-weight:500;padding:7px 12px;border:1px solid var(--line);border-radius:999px;background:var(--surface)}
+.fine{font-size:13px;color:var(--ink-2);max-width:56ch;margin:18px 0 0}
+.sel{user-select:all;color:var(--ink);font-weight:500;overflow-wrap:anywhere}
+.friend{font-size:14px;font-weight:600;color:var(--accent);margin:0 0 12px}
+
+/* results */
+.result{display:grid;gap:28px}
+@media (min-width:880px){.result{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:56px;align-items:start}}
+.summary{background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.summary-head{padding:24px 24px 20px;border-bottom:1px solid var(--line)}
+.type-name{font-family:var(--serif);font-size:clamp(34px,5vw,44px);line-height:1.05;margin:4px 0 8px}
+.type-line{margin:0;color:var(--ink-2)}
+.shade-strip{display:grid;grid-template-columns:repeat(6,1fr);height:8px}
+.shade-strip i:nth-child(1){background:var(--t1)}.shade-strip i:nth-child(2){background:var(--t2)}.shade-strip i:nth-child(3){background:var(--t3)}
+.shade-strip i:nth-child(4){background:var(--t4)}.shade-strip i:nth-child(5){background:var(--t5)}.shade-strip i:nth-child(6){background:var(--t6)}
+.glance{margin:0;padding:8px 24px 16px}
+.glance div{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:12px;padding-block:10px;border-bottom:1px solid var(--line);font-size:15px}
+.glance div:last-child{border-bottom:0}
+.glance dt{color:var(--ink-2)} .glance dd{margin:0;font-weight:500}
+.col{display:grid;gap:28px;min-width:0}
+.h2{font-weight:600;font-size:21px;line-height:1.25;margin:0 0 10px}
+.stats{border-top:1px solid var(--line)}
+.stat{display:grid;grid-template-columns:5.2ch 1fr;gap:16px;align-items:baseline;padding-block:14px;border-bottom:1px solid var(--line)}
+.stat b{font-family:var(--serif);font-weight:400;font-size:32px;line-height:1;font-variant-numeric:tabular-nums;white-space:nowrap}
+.stat span q{font-style:italic}
+.share{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:22px}
+.share p{margin:0 0 14px;max-width:60ch}
+.linkbox{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px}
+.linkbox .field{font-size:14px}
+.mini{font-size:14px;color:var(--ink-2);margin:12px 0 0}
+.mini b{color:var(--ink)}
+.board{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.board li{display:grid;grid-template-columns:2ch minmax(0,1fr) auto;gap:12px;align-items:center;font-size:15px}
+.board .rk{font-size:13px;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.board .nm{min-width:0}
+.board .nm span{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.board .bar{display:block;height:5px;border-radius:3px;background:var(--line);margin-top:6px;overflow:hidden}
+.board .bar i{display:block;height:100%;background:var(--t3)}
+.board li.me .bar i{background:var(--accent)}
+.board li.me .nm span{font-weight:600}
+.board .n{font-size:14px;font-weight:600;font-variant-numeric:tabular-nums}
+.example-note{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--lip);margin:0}
+
+/* link tracker */
+.hub{display:grid;gap:26px;max-width:720px;margin:0 auto}
+.goal-grid{display:grid;grid-template-columns:repeat(5,minmax(0,40px));gap:10px;margin:16px 0 10px}
+.goal-grid i{aspect-ratio:1/1;border-radius:50%;background:var(--surface);box-shadow:inset 0 0 0 1px var(--line)}
+.goal-grid i.on{background:var(--accent);box-shadow:none}
+.hub-num{font-family:var(--serif);font-size:clamp(48px,8vw,72px);line-height:1;margin:8px 0 0;font-variant-numeric:tabular-nums}
+.hub-num small{font-family:var(--sans);font-size:16px;color:var(--ink-2);margin-left:6px}
+.code-tag{font-weight:600;font-size:14px;letter-spacing:.1em;background:var(--tint);color:var(--ink);padding:6px 10px;border-radius:6px;display:inline-block}
+
+.end{max-width:620px;margin:0 auto;padding-block:20px}
+.end h1{font-weight:600;font-size:clamp(28px,4.4vw,40px);line-height:1.15;margin:0 0 14px;text-wrap:balance}
+.end p{font-size:17px;margin:0 0 14px}
+
+.foot{border-top:1px solid var(--line);color:var(--ink-2);font-size:13px;background:var(--surface)}
+.foot .wrap{padding-block:18px;display:flex;flex-wrap:wrap;gap:6px 24px;justify-content:space-between}
+
+.fade{animation:fade .25s ease both}
+@keyframes fade{from{opacity:.4;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="app" id="app" data-view="intro">
+  <div class="preview-band" id="previewBand" hidden>
+    <span>Preview: answers aren’t saved, and the numbers shown are examples.</span>
+    <span><a href="#hub" id="hubLinkPreview">See the link tracker</a> · <a href="#" id="restartPreview">Start over</a></span>
+  </div>
+  <header class="top">
+    <div class="wrap top-in">
+      <span class="mark">Face Value</span>
+      <span class="partner">GCDS × L’Oréal Luxe</span>
+    </div>
+    <div class="progress" aria-hidden="true"><i id="bar"></i></div>
+  </header>
+  <main class="wrap stage">
+    <section id="screen" aria-live="polite"></section>
+  </main>
+  <footer class="foot">
+    <div class="wrap">
+      <span>A Greenwich Country Day School student research project in partnership with L’Oréal Luxe. Not an official L’Oréal website.</span>
+      <span id="footContact"></span>
+    </div>
+  </footer>
+</div>
+<script>
+(function () {
+  'use strict';
+
+  /* ---------- setup ---------- */
+  var API = (window.FACE_VALUE_API || '').trim();
+  var GAS = !!(window.google && google.script && google.script.run);
+  var LIVE = !!API || GAS;
+  var S = { open: true, contactEmail: '', sharerGoal: 10, ambassadorGoal: 25, sharerLimit: 20 };
+  var params = {};
+  try { new URLSearchParams(location.search).forEach(function (v, k) { params[k] = v; }); } catch (e) { }
+  var REF = LIVE ? cleanCode(params.ref) : '';
+  var HUB = LIVE ? cleanCode(params.hub) : '';
+  var refInfo = null, knownSchools = [];
+
+  var app = document.getElementById('app');
+  var screen = document.getElementById('screen');
+  var bar = document.getElementById('bar');
+  var A = {}, trail = [], t0 = 0, rid = '';
+
+  function cleanCode(c) { c = String(c || '').trim().toUpperCase(); return /^[A-Z0-9-]{3,24}$/.test(c) ? c : ''; }
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function has(v, x) { return Array.isArray(v) && v.indexOf(x) !== -1; }
+  function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function randId(n) { var c = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789', s = '', b = new Uint32Array(n); window.crypto.getRandomValues(b); for (var i = 0; i < n; i++) s += c[b[i] % c.length]; return s; }
+  var store = {
+    get: function (k) { try { return JSON.parse(localStorage.getItem(k) || 'null'); } catch (e) { return null; } },
+    set: function (k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { } }
+  };
+  function siteUrl() { return location.origin + location.pathname; }
+
+  /* ---------- illustrations (flat, drawn in a 64x64 box) ---------- */
+  var I = {
+    stick: '<rect class="c-t2" x="24" y="8" width="16" height="16" rx="6"/><rect class="c-ink" x="22" y="22" width="20" height="8" rx="1.5"/><rect class="c-t1" x="22" y="29" width="20" height="28" rx="3"/><rect class="c-surf" x="26" y="33" width="2.4" height="20" rx="1.2" opacity=".5"/>',
+    tube: '<path class="c-t1" d="M20 6h24l-2.5 40c-.3 4-4.5 7-9.5 7s-9.2-3-9.5-7z"/><rect class="c-ink" x="24" y="51" width="16" height="9" rx="2"/><rect class="c-ink" x="20" y="6" width="24" height="3"/><rect class="c-surf" x="25.5" y="14" width="2.4" height="26" rx="1.2" opacity=".45"/>',
+    bottle: '<rect class="c-ink" x="24" y="5" width="16" height="7" rx="2"/><rect class="c-ink" x="28" y="11" width="8" height="10"/><rect class="c-t2" x="18" y="20" width="28" height="38" rx="5"/><rect class="c-surf" x="22" y="25" width="2.6" height="28" rx="1.3" opacity=".45"/>',
+    dropper: '<rect class="c-ink" x="28" y="5" width="8" height="15" rx="4"/><rect class="c-ink" x="27" y="19" width="10" height="7"/><rect class="c-metal" x="20" y="26" width="24" height="32" rx="4"/><rect class="c-surf" x="24" y="35" width="16" height="13" rx="1" opacity=".85"/>',
+    brow: '<rect class="c-ink" x="28" y="3" width="8" height="17" rx="2.5"/><rect class="c-metal" x="31" y="20" width="2" height="6"/><rect class="c-t4" x="29.5" y="25" width="5" height="10" rx="2.5"/><rect class="c-ink" x="27" y="39" width="10" height="22" rx="3"/>',
+    balm: '<rect class="c-t3" x="24" y="13" width="16" height="17" rx="7"/><rect class="c-t1" x="21" y="28" width="22" height="30" rx="4"/><rect class="c-ink" x="21" y="28" width="22" height="6"/><rect class="c-surf" x="25" y="38" width="2.4" height="15" rx="1.2" opacity=".5"/>',
+    mascara: '<rect class="c-ink" x="27" y="3" width="10" height="18" rx="3"/><rect class="c-metal" x="30.5" y="21" width="3" height="8"/><rect class="c-ink" x="28.5" y="28" width="7" height="15" rx="3.5"/><rect class="c-surf" x="28.5" y="31" width="7" height="1.3" opacity=".5"/><rect class="c-surf" x="28.5" y="34.5" width="7" height="1.3" opacity=".5"/><rect class="c-surf" x="28.5" y="38" width="7" height="1.3" opacity=".5"/><rect class="c-ink" x="25" y="46" width="14" height="15" rx="3"/>',
+    compact: '<rect class="c-metal" x="28" y="7" width="8" height="5" rx="1"/><circle class="c-ink" cx="32" cy="35" r="24"/><circle class="c-t2" cx="32" cy="35" r="18"/><path class="c-surf" opacity=".4" d="M19.5 31a13.5 13.5 0 0 1 12.5-10v4.2a9.4 9.4 0 0 0-8.4 5.8z"/>',
+    brush: '<g transform="rotate(-35 32 32)"><rect class="c-ink" x="29" y="31" width="6" height="30" rx="3"/><rect class="c-metal" x="28" y="24" width="8" height="8" rx="1"/><path class="c-t2" d="M27 25c-1-9 1.5-17 5-21 3.5 4 6 12 5 21z"/></g>',
+    blush: '<rect class="c-ink" x="8" y="13" width="48" height="38" rx="8"/><circle class="c-lip" cx="25" cy="32" r="11" opacity=".85"/><circle class="c-t4" cx="41" cy="32" r="11"/>',
+    palette: '<rect class="c-ink" x="6" y="14" width="52" height="36" rx="6"/><circle class="c-t1" cx="20" cy="26" r="6"/><circle class="c-t3" cx="32" cy="26" r="6"/><circle class="c-t5" cx="44" cy="26" r="6"/><circle class="c-t2" cx="20" cy="39" r="6"/><circle class="c-t4" cx="32" cy="39" r="6"/><circle class="c-t6" cx="44" cy="39" r="6"/>',
+    gloss: '<rect class="c-ink" x="26" y="4" width="12" height="20" rx="3"/><rect class="c-lip" x="24" y="23" width="16" height="36" rx="7"/><rect class="c-surf" x="28" y="28" width="2.4" height="24" rx="1.2" opacity=".45"/>',
+    lipstick: '<rect class="c-ink" x="21" y="36" width="22" height="22" rx="2.5"/><rect class="c-metal" x="23" y="29" width="18" height="8" rx="1"/><path class="c-lip" d="M25 29V15.5c0-2 1.2-3.6 3-4.3L39 7v22z"/>',
+    none: '<circle class="c-ring" cx="32" cy="32" r="20"/>'
+  };
+  function icon(n) { return '<svg viewBox="0 0 64 64" aria-hidden="true" focusable="false">' + I[n] + '</svg>'; }
+  function place(n, x, y, s) { return '<g transform="translate(' + x + ' ' + y + ') scale(' + s + ')">' + I[n] + '</g>'; }
+  var TICK = '<span class="tick" aria-hidden="true"><svg viewBox="0 0 12 12"><path d="M2 6.4 4.8 9 10 3.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>';
+
+  function coverArt() {
+    var tones = '';
+    for (var i = 0; i < 6; i++) tones += '<circle class="c-t' + (i + 1) + '" cx="' + (164 + i * 46) + '" cy="334" r="16"/>';
+    return '<svg viewBox="0 0 560 400" role="img" aria-label="A shelf of grooming products: a skincare dropper, a concealer stick, a tinted moisturizer, a brow gel and a lip balm, above a range of skin-tone shades">' +
+      '<rect class="c-panel" x="0" y="0" width="560" height="400"/>' +
+      place('dropper', 26, 117, 2.6) + place('stick', 122, 120, 2.6) + place('tube', 214, 106, 2.7) + place('brow', 318, 109, 2.6) + place('balm', 410, 129, 2.4) +
+      '<rect class="c-line" x="30" y="268" width="500" height="3"/>' +
+      '<text class="c-label" x="138" y="339" text-anchor="end">FAIR</text>' + tones + '<text class="c-label" x="420" y="339">DEEP</text>' +
+    '</svg>';
+  }
+  function conceptArt() {
+    return '<svg viewBox="0 0 560 240" role="img" aria-label="A concealer stick next to skin with a red spot, then the same skin with the spot covered">' +
+      '<rect class="c-panel" x="0" y="0" width="560" height="240"/>' +
+      place('stick', 22, 30, 2.9) +
+      '<rect class="c-t2" x="226" y="34" width="150" height="172" rx="12"/>' +
+      '<rect class="c-t2" x="392" y="34" width="150" height="172" rx="12"/>' +
+      '<circle class="c-lip" cx="301" cy="126" r="15" opacity=".35"/><circle class="c-lip" cx="301" cy="126" r="7" opacity=".85"/>' +
+      '<circle class="c-lip" cx="467" cy="126" r="15" opacity=".07"/>' +
+      '<text class="c-label" x="242" y="62">BEFORE</text>' +
+      '<text class="c-label" x="408" y="62">AFTER 10 SEC</text>' +
+    '</svg>';
+  }
+
+  /* ---------- questions ---------- */
+  var WEAR = ['Every day', 'A few times a week', 'Only for special occasions'];
+  var STOPPED = 'I’ve tried it, but I stopped', NEVER = 'Never';
+  function isW() { return WEAR.indexOf(A.freq) !== -1; }
+  function isL() { return A.freq === STOPPED; }
+  function isN() { return A.freq === NEVER; }
+
+  var PRODUCTS = [
+    { v: 'Concealer', icon: 'stick', s: 'concealer' },
+    { v: 'Foundation or skin tint', icon: 'bottle', s: 'foundation' },
+    { v: 'Tinted moisturizer or BB cream', icon: 'tube', s: 'tinted moisturizer' },
+    { v: 'Powder or setting spray', icon: 'compact', s: 'powder' },
+    { v: 'Mascara', icon: 'mascara', s: 'mascara' },
+    { v: 'Brow products', icon: 'brow', s: 'brow products' },
+    { v: 'Eyeliner or eyeshadow', icon: 'palette', s: 'eye makeup' },
+    { v: 'Blush or bronzer', icon: 'blush', s: 'blush or bronzer' },
+    { v: 'Lip products', icon: 'gloss', s: 'lip products', note: 'Balm, tint, gloss, liner' }
+  ];
+  function hero() { if (A.w_hero) return A.w_hero; var p = A.w_products || []; return p.length === 1 ? p[0] : null; }
+  function short(v) { for (var i = 0; i < PRODUCTS.length; i++) if (PRODUCTS[i].v === v) return PRODUCTS[i].s; return String(v).toLowerCase(); }
+
+  var L_TIME = 'It took too long', L_LOOK = 'I didn’t like how it looked on me', L_SKIN = 'It broke me out or irritated my skin',
+      L_COMMENTS = 'People made comments', L_COST = 'It was too expensive to keep buying', L_SPORT = 'Sports or practice made it pointless', L_BORED = 'I lost interest';
+  var N_NEED = 'I don’t feel I need it', N_HOW = 'I don’t know how to use it', N_OTHERS = 'I’m worried about what people would think',
+      N_COST = 'It’s too expensive', N_NOTME = 'It doesn’t feel like it’s made for people like me', N_SKIN = 'It’s bad for my skin, or my skin is sensitive', N_NEVER = 'I’ve never really thought about it';
+  var SET_YES = 'Yes', SET_MAYBE = 'No, but I’d consider one', SET_NO = 'No, and I’m not interested';
+  var TRY_NONE = 'None, I’m not interested';
+  var BRANDS = ['e.l.f.', 'Rare Beauty', 'Rhode', 'Glossier', 'Fenty Beauty', 'Maybelline', 'NYX', 'L’Oréal Paris', 'Charlotte Tilbury', 'Too Faced', 'Benefit', 'YSL Beauty', 'Armani Beauty', 'Dior', 'Lancôme', 'Kosas'];
+  var SCALE = ['Definitely not', 'Probably not', 'Maybe', 'Probably', 'Definitely'];
+
+  var Q = [
+    { id: 'about', type: 'about', label: 'About you', title: 'A little about you' },
+    { id: 'freq', type: 'freq', label: 'Your routine', title: 'How often do you wear makeup?',
+      help: 'This counts even if it’s just concealer on a breakout, brow gel or tinted lip balm.',
+      options: [{ v: 'Every day', d: 7, l: 'Daily' }, { v: 'A few times a week', d: 3, l: 'Some days' }, { v: 'Only for special occasions', d: 1, l: 'Occasionally' }, { v: STOPPED, d: -1, l: 'Used to' }, { v: NEVER, d: 0, l: 'Never' }] },
+
+    /* people who wear makeup */
+    { id: 'w_products', type: 'cardsMulti', show: isW, label: 'Your routine', title: 'Which of these do you use at least once a month?', help: 'Select all that apply.', options: PRODUCTS },
+    { id: 'w_hero', type: 'cards', show: function () { return isW() && (A.w_products || []).length > 1; }, label: 'Your routine', title: 'If you could keep only one, which would it be?',
+      options: function () { return PRODUCTS.filter(function (p) { return has(A.w_products, p.v); }); } },
+    { id: 'w_hero_why', type: 'chipsMulti', max: 2, show: function () { return isW() && !!hero(); }, label: 'Your routine',
+      title: function () { return 'Why the ' + esc(short(hero())) + '?'; }, help: 'Select up to 2.',
+      options: ['It covers things I don’t want seen', 'It makes me look awake', 'It’s quick', 'It feels like me', 'People notice when I skip it', 'It’s the one I’m best at'] },
+    { id: 'w_why', type: 'chipsMulti', max: 3, show: isW, label: 'Your routine', title: 'Why do you wear makeup?', help: 'Select up to 3.',
+      options: ['To cover acne, redness or uneven skin', 'To look put-together', 'To feel more confident', 'To express myself', 'For photos or social media', 'It’s part of my routine'] },
+    { id: 'w_when', type: 'chipsMulti', show: isW, label: 'Your routine', title: 'When do you wear it?', help: 'Select all that apply.',
+      options: ['School', 'Sports or practice', 'Hanging out with friends', 'Dances, parties or events', 'Work', 'Photos or videos'] },
+    { id: 'w_pairs', type: 'pairs', show: isW, label: 'Your style', title: 'Which best describes you?', help: 'Pick one from each row.',
+      pairs: [{ id: 'w_look', a: 'Barely there', b: 'Noticeable' },
+              { id: 'w_shop', a: 'Drugstore', b: 'Splurge' },
+              { id: 'w_first', a: 'Skincare first', b: 'Makeup first' }] },
+    { id: 'w_brand', type: 'brand', show: isW, label: 'Brands', title: 'What’s your go-to makeup brand right now?', help: 'Type it, or select one.', options: shuffle(BRANDS) },
+    { id: 'w_brand_why', type: 'chipsMulti', max: 3, show: function () { return isW() && !!A.w_brand && A.w_brand !== 'No go-to brand'; }, label: 'Brands',
+      title: function () { return 'What makes ' + esc(A.w_brand) + ' your go-to?'; }, help: 'Select up to 3.',
+      options: ['The price', 'How well it works', 'How it makes me feel', 'A creator I follow uses it', 'My friends use it', 'The packaging', 'The ingredients', 'It’s made for people like me'] },
+    { id: 'w_price', type: 'slider', show: isW, label: 'Price', title: 'What’s the most you’d pay for one makeup product?', min: 5, max: 60, step: 5, start: 20 },
+    { id: 'w_matters', type: 'chipsMulti', max: 3, show: isW, label: 'Choosing products', title: 'What matters most when you choose a product?', help: 'Select up to 3.',
+      options: ['Price', 'How well it works', 'Looks natural', 'Good for my skin', 'Shade match', 'Brand name', 'Packaging', 'Reviews or recommendations'] },
+    { id: 'w_sets', type: 'chips', stack: true, show: isW, label: 'Sets and bundles', title: 'Have you bought a makeup set or bundle in the past year?', help: 'Several products sold together, such as a holiday set.',
+      options: [SET_YES, SET_MAYBE, SET_NO] },
+    { id: 'w_sets_why', type: 'chipsMulti', show: function () { return isW() && A.w_sets === SET_YES; }, label: 'Sets and bundles', title: 'Why did you buy it?', help: 'Select all that apply.',
+      options: ['To try several products at once', 'The value or discount', 'It was a gift', 'The extras, like a bag or minis', 'It was a holiday or limited edition'] },
+    { id: 'w_sets_worth', type: 'chipsMulti', max: 2, show: function () { return isW() && A.w_sets === SET_MAYBE; }, label: 'Sets and bundles', title: 'What would make a set worth buying?', help: 'Select up to 2.',
+      options: ['Only products I’d actually use', 'Under $30 for the whole set', 'Mini sizes to try things', 'A bag or case I’d keep', 'A limited edition'] },
+    { id: 'w_where', type: 'chipsMulti', show: isW, label: 'Shopping', title: 'Where do you usually buy makeup?', help: 'Select all that apply.',
+      options: ['Sephora', 'Ulta', 'Drugstore (CVS, Walgreens)', 'Target', 'Amazon', 'TikTok Shop', 'Brand websites', 'Department stores'] },
+
+    /* people who stopped */
+    { id: 'l_stop', type: 'chipsMulti', stack: true, show: isL, label: 'Why you stopped', title: 'What made you stop?', help: 'Select all that apply.', options: [L_TIME, L_LOOK, L_SKIN, L_COMMENTS, L_COST, L_SPORT, L_BORED] },
+    { id: 'l_look_off', type: 'chipsMulti', show: function () { return isL() && has(A.l_stop, L_LOOK); }, label: 'Why you stopped', title: 'What didn’t look right?', help: 'Select all that apply.',
+      options: ['Too obvious or cakey', 'Wrong shade', 'I didn’t know how to apply it', 'It didn’t last'] },
+    { id: 'l_acne', type: 'chips', show: function () { return isL() && has(A.l_stop, L_SKIN); }, label: 'Why you stopped', title: 'Would a product labeled acne-safe, with skincare ingredients, change your mind?', options: ['Yes', 'Maybe', 'No'] },
+    { id: 'l_time', type: 'chips', show: function () { return isL() && has(A.l_stop, L_TIME); }, label: 'Why you stopped', title: 'How much time would you spend on makeup in the morning?', options: ['Under 1 minute', '1–3 minutes', '3–5 minutes', 'More than 5 minutes'] },
+
+    /* people who never wear it */
+    { id: 'n_why', type: 'chipsMulti', stack: true, show: isN, label: 'Why not', title: 'Why don’t you wear makeup?', help: 'Select all that apply.', options: [N_NEED, N_HOW, N_OTHERS, N_COST, N_NOTME, N_SKIN, N_NEVER] },
+    { id: 'n_skincare', type: 'chips', show: function () { return isN() && has(A.n_why, N_NEED); }, label: 'Why not', title: 'Do you use any skincare?', options: ['Nothing', 'Just face wash', 'A few products', 'A full routine'] },
+    { id: 'n_learn', type: 'chipsMulti', max: 2, show: function () { return isN() && has(A.n_why, N_HOW); }, label: 'Why not', title: 'If you wanted to learn, where would you go?', help: 'Select up to 2.',
+      options: ['A friend showing me', 'A TikTok or YouTube tutorial', 'Someone in a store', 'Instructions on the product', 'I wouldn’t bother'] },
+    { id: 'n_for_me', type: 'chipsMulti', show: function () { return isN() && has(A.n_why, N_NOTME); }, label: 'Why not', title: 'What would make a product feel like it’s made for you?', help: 'Select all that apply.',
+      options: ['Made for guys', 'Gender-neutral packaging', 'Athletes using it', 'Creators I follow using it', 'Called skincare, not makeup', 'Simple packaging'] },
+    { id: 'n_need_see', type: 'chipsMulti', show: function () { return isN() && has(A.n_why, N_SKIN); }, label: 'Why not', title: 'What would you need to see on the label?', help: 'Select all that apply.',
+      options: ['Dermatologist-tested', 'Won’t clog pores', 'Fragrance-free', 'Short ingredient list', 'Fights acne'] },
+
+    /* follow-ups shared by both groups */
+    { id: 'invisible', type: 'chips', show: function () { return (isN() && has(A.n_why, N_OTHERS)) || (isL() && has(A.l_stop, L_COMMENTS)); }, label: 'Trying something new', title: 'Would you try something no one could tell you’re wearing?', options: ['Yes', 'Maybe', 'No'] },
+    { id: 'fair_price', type: 'slider', show: function () { return (isN() && has(A.n_why, N_COST)) || (isL() && has(A.l_stop, L_COST)); }, label: 'Price', title: 'What’s a fair price for one product?', min: 5, max: 60, step: 5, start: 15 },
+    { id: 'try_one', type: 'cards', show: function () { return isL() || isN(); }, label: 'Trying something new', title: 'If you tried one product, which would it be?',
+      options: [{ v: 'Something to cover a breakout', icon: 'stick', note: 'Like a concealer stick' }, { v: 'Tinted moisturizer or BB cream', icon: 'tube' }, { v: 'Brow gel', icon: 'brow' }, { v: 'Tinted lip balm', icon: 'balm' }, { v: 'Mascara', icon: 'mascara' }, { v: TRY_NONE, icon: 'none' }] },
+    { id: 'try_what', type: 'chipsMulti', max: 3, show: function () { return (isL() || isN()) && !!A.try_one && A.try_one !== TRY_NONE; }, label: 'Trying something new', title: 'What would get you to try it?', help: 'Select up to 3.',
+      options: ['A free sample', 'A friend recommending it', 'A creator I follow using it', 'Skincare benefits, like fighting acne', 'Made for guys, or gender-neutral', 'It looks invisible', 'Quick to apply, like a stick', 'A low price'] },
+
+    /* everyone */
+    { id: 'check', type: 'check', label: 'Attention check', title: 'To show you’re reading, select the mascara.', options: shuffle([{ v: 'Lipstick', icon: 'lipstick' }, { v: 'Mascara', icon: 'mascara' }, { v: 'Powder', icon: 'compact' }, { v: 'Brush', icon: 'brush' }]) },
+    { id: 'concept_try', type: 'concept', label: 'New product idea', title: 'Would you try this?' },
+    { id: 'concept_price', type: 'chips', show: function () { return Number(A.concept_try) >= 3; }, label: 'New product idea', title: 'What would you pay for it?', options: ['Under $15', '$15–$25', '$25–$35', '$35–$45', 'More than $45'] },
+    { id: 'discover', type: 'chipsMulti', label: 'Discovery', title: 'Where do you hear about new beauty or grooming products?', help: 'Select all that apply.',
+      options: ['TikTok', 'Instagram', 'YouTube', 'Snapchat', 'Pinterest', 'Friends or family', 'In stores', 'Amazon'] },
+    { id: 'school', type: 'school', label: 'Your school', title: 'Which school do you go to?', help: 'Used only to count responses by school.' },
+    { id: 'wish', type: 'text', optional: true, label: 'Your ideas', title: 'What do you wish makeup or skincare did that nothing does right now?', help: 'Optional. Think about how it works, how it’s packaged or how it’s sold.' }
+  ];
+  function byId(id) { for (var i = 0; i < Q.length; i++) if (Q[i].id === id) return Q[i]; return null; }
+  function shown() { return Q.filter(function (q) { return !q.show || q.show(); }); }
+  function optList(q) { var o = typeof q.options === 'function' ? q.options() : q.options; return o.map(function (x) { return typeof x === 'string' ? { v: x } : x; }); }
+  function answered(q) {
+    if (q.type === 'pairs') return q.pairs.every(function (p) { return A[p.id] != null; });
+    if (q.type === 'about') return A.age != null && A.gender != null;
+    var v = A[q.id];
+    if (Array.isArray(v)) return v.length > 0;
+    return v != null && v !== '';
+  }
+  function progress(final) {
+    var v = shown(), total = A.freq ? v.length : 18, done = v.filter(answered).length;
+    bar.style.width = (final ? 100 : Math.min(98, Math.round(done / total * 100))) + '%';
+  }
+
+  /* ---------- rendering ---------- */
+  function setView(v) { app.dataset.view = v; }
+  function toTop() { try { window.scrollTo(0, 0); } catch (e) { } }
+
+  function renderIntro() {
+    setView('intro'); progress();
+    var friend = refInfo && refInfo.school ? '<p class="friend">Shared with you by a student at ' + esc(refInfo.school) + '</p>' : (REF ? '<p class="friend">Shared with you by a friend</p>' : '');
+    screen.innerHTML =
+      '<div class="intro fade">' +
+        '<div>' + friend +
+          '<p class="label">GCDS × L’Oréal Luxe · Student research</p>' +
+          '<h1 class="intro-title">What do you put on your face, if anything?</h1>' +
+          '<p class="lede">We’re students at Greenwich Country Day School working with L’Oréal Luxe to understand what people our age want from makeup and grooming products. Guys, girls, everyone: whether you use concealer every day or have never touched it, your answers count the same.</p>' +
+          '<ul class="facts"><li>About 4 minutes</li><li>Anonymous</li><li>Stop at any time</li></ul>' +
+          '<button class="btn primary" id="start">Start the survey</button>' +
+          '<p class="fine">By starting, you agree to take part. We don’t collect names or emails. Results are shared with our teachers and, as group totals only, with L’Oréal Luxe advisors for our class project.' + (S.contactEmail ? ' Questions: <span class="sel">' + esc(S.contactEmail) + '</span>' : '') + '</p>' +
+        '</div>' +
+        '<div class="art">' + coverArt() + '</div>' +
+      '</div>';
+    document.getElementById('start').addEventListener('click', function () {
+      A = {}; trail = []; t0 = Date.now(); rid = randId(12);
+      render(Q[0]);
+    });
+    toTop();
+  }
+
+  function chip(v, on) { return '<button class="chip" data-v="' + esc(v) + '" aria-pressed="' + !!on + '">' + esc(v) + '</button>'; }
+
+  function render(q) {
+    setView('q');
+    var v = shown(), n = v.indexOf(q) + 1;
+    var title = typeof q.title === 'function' ? q.title() : q.title;
+    var body = '', needsNext = true, nextLabel = 'Next';
+    var opts = q.options ? optList(q) : [];
+
+    switch (q.type) {
+      case 'about':
+        body = '<div class="group"><p class="label">Age</p><div class="chips" data-key="age">' +
+          ['Under 13', '13', '14', '15', '16', '17', '18', '19 or older'].map(function (o) { return chip(o, A.age === o); }).join('') + '</div></div>' +
+          '<div class="group"><p class="label">Gender</p><div class="chips" data-key="gender">' +
+          ['Male', 'Female', 'Non-binary'].map(function (o) { return chip(o, A.gender === o); }).join('') + '</div></div>';
+        break;
+      case 'freq':
+        needsNext = false;
+        body = '<div class="rows">' + opts.map(function (o) {
+          var dots = '';
+          for (var i = 0; i < 7; i++) dots += '<i class="' + (o.d === -1 ? (i === 0 ? 'x' : '') : (i < o.d ? 'f' : '')) + '"></i>';
+          return '<button class="card" data-v="' + esc(o.v) + '" aria-pressed="' + (A.freq === o.v) + '"><span>' + esc(o.v) + '</span><span><span class="dots">' + dots + '</span><span class="dots-label">' + esc(o.l) + '</span></span></button>';
+        }).join('') + '</div>';
+        break;
+      case 'cards': case 'check':
+        needsNext = false;
+        body = '<div class="cards' + (q.type === 'check' ? ' check' : '') + '">' + opts.map(function (o) {
+          var lab = q.type === 'check' ? '' : '<span>' + esc(o.v) + (o.note ? '<small>' + esc(o.note) + '</small>' : '') + '</span>';
+          return '<button class="card" data-v="' + esc(o.v) + '" aria-pressed="' + (A[q.id] === o.v) + '"' + (q.type === 'check' ? ' aria-label="' + esc(o.v) + '"' : '') + '>' + icon(o.icon) + lab + TICK + '</button>';
+        }).join('') + '</div>';
+        break;
+      case 'cardsMulti':
+        body = '<div class="cards">' + opts.map(function (o) {
+          return '<button class="card" data-v="' + esc(o.v) + '" aria-pressed="' + has(A[q.id], o.v) + '">' + icon(o.icon) + '<span>' + esc(o.v) + (o.note ? '<small>' + esc(o.note) + '</small>' : '') + '</span>' + TICK + '</button>';
+        }).join('') + '</div>';
+        break;
+      case 'chips':
+        needsNext = false;
+        body = '<div class="chips' + (q.stack ? ' stack' : '') + '">' + opts.map(function (o) { return chip(o.v, A[q.id] === o.v); }).join('') + '</div>';
+        break;
+      case 'chipsMulti':
+        body = '<div class="chips' + (q.stack ? ' stack' : '') + '">' + opts.map(function (o) { return chip(o.v, has(A[q.id], o.v)); }).join('') + '</div>';
+        break;
+      case 'pairs':
+        body = '<div class="pairs">' + q.pairs.map(function (p) {
+          var val = A[p.id];
+          return '<div class="pair" data-pair="' + p.id + '" role="group">' +
+            '<button data-v="' + esc(p.a) + '" aria-pressed="' + (val === p.a) + '">' + esc(p.a) + '</button>' +
+            '<button data-v="' + esc(p.b) + '" aria-pressed="' + (val === p.b) + '">' + esc(p.b) + '</button></div>';
+        }).join('') + '</div>';
+        break;
+      case 'slider':
+        var cur = A[q.id] != null ? A[q.id] : q.start;
+        body = '<p class="price-read" id="priceRead"></p>' +
+          '<input class="range" id="rng" type="range" min="' + q.min + '" max="' + q.max + '" step="' + q.step + '" value="' + cur + '" aria-label="Price in dollars">' +
+          '<div class="ticks"><span>$' + q.min + '</span><span>$20</span><span>$40</span><span>$' + q.max + '+</span></div>';
+        break;
+      case 'concept':
+        needsNext = false;
+        body = '<div class="concept"><div class="art">' + conceptArt() + '</div>' +
+          '<p class="concept-copy">A concealer stick that covers a breakout or redness in about 10 seconds. It looks like skin, not makeup, and it contains acne-fighting skincare ingredients.</p>' +
+          '<div class="scale">' + SCALE.map(function (s, i) {
+            return '<button data-v="' + (i + 1) + '" aria-pressed="' + (String(A.concept_try) === String(i + 1)) + '"><b>' + (i + 1) + '</b>' + esc(s) + '</button>';
+          }).join('') + '</div></div>';
+        break;
+      case 'brand':
+        body = '<div class="stack-gap"><input class="field" id="brandIn" type="text" maxlength="60" autocomplete="off" placeholder="Brand name" value="' + esc(A.w_brand && A.w_brand !== 'No go-to brand' ? A.w_brand : '') + '" aria-label="Brand name">' +
+          '<div class="chips">' + opts.concat([{ v: 'No go-to brand' }]).map(function (o) { return chip(o.v, A.w_brand === o.v); }).join('') + '</div></div>';
+        break;
+      case 'school':
+        var pre = A.school || (refInfo && refInfo.school) || '';
+        body = '<input class="field" id="schoolIn" type="text" maxlength="80" autocomplete="off" list="schoolList" placeholder="School name" value="' + esc(pre === 'Not given' ? '' : pre) + '" aria-label="School name">' +
+          '<datalist id="schoolList">' + knownSchools.map(function (s) { return '<option value="' + esc(s) + '"></option>'; }).join('') + '</datalist>' +
+          '<p class="hint">Please write the full name, for example “Greenwich High School.”</p>';
+        break;
+      case 'text':
+        nextLabel = 'Submit';
+        body = '<textarea class="field" id="txt" maxlength="500" placeholder="For example: a concealer that also treats the breakout">' + esc(A[q.id] || '') + '</textarea><p class="hint" id="txtCount"></p>';
+        break;
+    }
+
+    var right = needsNext ? '<div class="nav-right"><span class="count" id="count"></span>' + (q.type === 'school' ? '<button class="text-btn" id="skip">Prefer not to say</button>' : '') + '<button class="btn primary" id="next">' + nextLabel + '</button></div>' : '';
+    screen.innerHTML = '<div class="col-q fade" data-type="' + q.type + '">' +
+      '<p class="label"><span class="n">Question ' + n + '</span> · ' + esc(q.label || '') + '</p>' +
+      '<h1 class="q-title" id="qt" tabindex="-1">' + title + '</h1>' +
+      (q.help ? '<p class="q-help">' + q.help + '</p>' : '') +
+      '<div class="answers">' + body + '</div>' +
+      '<div class="nav"><button class="text-btn" id="back">Back</button>' + right + '</div></div>';
+
+    bind(q);
+    progress();
+    toTop();
+    var h = document.getElementById('qt'); if (h) try { h.focus({ preventScroll: true }); } catch (e) { }
+  }
+
+  function bind(q) {
+    var root = screen.querySelector('.col-q');
+    var next = document.getElementById('next');
+    var count = document.getElementById('count');
+    document.getElementById('back').addEventListener('click', goBack);
+
+    function refresh() {
+      if (next) next.disabled = !(q.optional || answered(q));
+      if (count && q.max) count.textContent = (A[q.id] || []).length + ' of ' + q.max;
+      progress();
+    }
+    function pick(btn, v) {
+      A[q.id] = v;
+      root.querySelectorAll('[data-v]').forEach(function (b) { b.setAttribute('aria-pressed', String(b === btn)); });
+      progress();
+      setTimeout(function () { advance(q); }, 220);
+    }
+
+    if (q.type === 'about') {
+      root.querySelectorAll('.chips').forEach(function (g) {
+        var key = g.getAttribute('data-key');
+        g.addEventListener('click', function (e) {
+          var b = e.target.closest('[data-v]'); if (!b) return;
+          A[key] = b.getAttribute('data-v');
+          g.querySelectorAll('[data-v]').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+          refresh();
+        });
+      });
+    }
+    if (q.type === 'freq' || q.type === 'cards' || q.type === 'check' || q.type === 'chips' || q.type === 'concept') {
+      root.querySelector('.answers').addEventListener('click', function (e) {
+        var b = e.target.closest('[data-v]'); if (!b) return;
+        var v = b.getAttribute('data-v');
+        pick(b, q.type === 'concept' ? Number(v) : v);
+      });
+    }
+    if (q.type === 'cardsMulti' || q.type === 'chipsMulti') {
+      root.querySelector('.answers').addEventListener('click', function (e) {
+        var b = e.target.closest('[data-v]'); if (!b) return;
+        var v = b.getAttribute('data-v'), cur = (A[q.id] || []).slice(), i = cur.indexOf(v);
+        if (i !== -1) cur.splice(i, 1);
+        else if (q.max && cur.length >= q.max) {
+          b.classList.remove('shake'); void b.offsetWidth; b.classList.add('shake');
+          if (count) { count.classList.add('warn'); setTimeout(function () { count.classList.remove('warn'); }, 900); }
+          return;
+        } else cur.push(v);
+        A[q.id] = cur;
+        b.setAttribute('aria-pressed', String(i === -1));
+        refresh();
+      });
+    }
+    if (q.type === 'pairs') {
+      root.querySelectorAll('.pair').forEach(function (p) {
+        p.addEventListener('click', function (e) {
+          var b = e.target.closest('[data-v]'); if (!b) return;
+          A[p.getAttribute('data-pair')] = b.getAttribute('data-v');
+          p.querySelectorAll('[data-v]').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+          refresh();
+        });
+      });
+    }
+    if (q.type === 'slider') {
+      var rng = document.getElementById('rng'), read = document.getElementById('priceRead');
+      var upd = function () {
+        var val = Number(rng.value);
+        read.innerHTML = '$' + val + (val >= q.max ? '<small>or more</small>' : '');
+        rng.style.setProperty('--p', ((val - q.min) / (q.max - q.min) * 100) + '%');
+      };
+      rng.addEventListener('input', upd); upd();
+      next.addEventListener('click', function () { A[q.id] = Number(rng.value); advance(q); });
+      next.disabled = false;
+      return;
+    }
+    if (q.type === 'brand') {
+      var inp = document.getElementById('brandIn');
+      inp.addEventListener('input', function () {
+        A.w_brand = inp.value.trim();
+        root.querySelectorAll('.chip').forEach(function (c) { c.setAttribute('aria-pressed', String(c.getAttribute('data-v') === A.w_brand)); });
+        refresh();
+      });
+      root.querySelector('.chips').addEventListener('click', function (e) {
+        var b = e.target.closest('[data-v]'); if (!b) return;
+        var v = b.getAttribute('data-v');
+        A.w_brand = v; inp.value = v === 'No go-to brand' ? '' : v;
+        root.querySelectorAll('.chip').forEach(function (c) { c.setAttribute('aria-pressed', String(c === b)); });
+        refresh();
+      });
+      inp.addEventListener('keydown', function (e) { if (e.key === 'Enter' && !next.disabled) next.click(); });
+    }
+    if (q.type === 'school') {
+      var si = document.getElementById('schoolIn');
+      var setS = function () { A.school = si.value.trim().length >= 2 ? si.value.trim() : ''; refresh(); };
+      si.addEventListener('input', setS); setS();
+      si.addEventListener('keydown', function (e) { if (e.key === 'Enter' && !next.disabled) next.click(); });
+      document.getElementById('skip').addEventListener('click', function () { A.school = 'Not given'; advance(q); });
+    }
+    if (q.type === 'text') {
+      var ta = document.getElementById('txt'), tc = document.getElementById('txtCount');
+      var setT = function () { A[q.id] = ta.value.trim(); tc.textContent = ta.value.length + ' / 500'; };
+      ta.addEventListener('input', setT); setT();
+    }
+    if (next) next.addEventListener('click', function () { if (!next.disabled) advance(q); });
+    refresh();
+  }
+
+  function advance(q) {
+    trail.push(q.id);
+    var v = shown(), i = v.indexOf(q), nxt = v[i + 1];
+    if (!nxt) return submit();
+    render(nxt);
+  }
+  function goBack() {
+    var prev = trail.pop();
+    if (prev) render(byId(prev)); else renderIntro();
+  }
+
+  /* ---------- routine type ---------- */
+  var TYPES = {
+    minimal: ['Everyday Minimalist', 'You wear makeup most days and keep it simple.'],
+    full: ['Full Routine', 'Makeup is a real part of your day, and it shows.'],
+    occasion: ['Occasion Only', 'You save makeup for the moments that matter.'],
+    skin: ['Skincare First', 'Skincare does most of the work. Makeup finishes it.'],
+    pause: ['Taking a Break', 'You’ve used makeup before and stepped back.'],
+    open: ['Open to Trying', 'You don’t wear makeup now, but the right product could change that.'],
+    no: ['Not for Me', 'You skip makeup and plan to keep it that way. That’s useful to know too.']
+  };
+  function routineType() {
+    var k;
+    if (isW()) {
+      if (A.freq === 'Only for special occasions') k = 'occasion';
+      else if (A.w_look === 'Noticeable') k = 'full';
+      else if (A.w_first === 'Skincare first') k = 'skin';
+      else k = 'minimal';
+    } else if (isL()) k = 'pause';
+    else k = A.try_one && A.try_one !== TRY_NONE ? 'open' : 'no';
+    return { key: k, name: TYPES[k][0], line: TYPES[k][1] };
+  }
+  function glance(a) {
+    var rows = [['Wears makeup', a.freq]];
+    if (a.w_hero) rows.push(['Would keep', a.w_hero]);
+    if (a.w_brand) rows.push(['Go-to brand', a.w_brand]);
+    if (a.w_price != null) rows.push(['Most you’d pay', '$' + a.w_price + (a.w_price >= 60 ? '+' : '')]);
+    if (a.l_stop) rows.push(['Why you stopped', a.l_stop[0]]);
+    if (a.n_why) rows.push(['Main reason', a.n_why[0]]);
+    if (a.try_one) rows.push(['Would try', a.try_one]);
+    if (a.concept_try) rows.push(['The concealer stick', SCALE[a.concept_try - 1]]);
+    if (a.discover) rows.push(['Hears about products on', a.discover.slice(0, 2).join(', ')]);
+    return rows;
+  }
+
+  /* ---------- server ---------- */
+  function unwrap(j) { if (!j || j.error) throw new Error((j && j.error) || 'Server error'); return j.data; }
+  function api(name, arg) {
+    if (API) {
+      if (name === 'submitResponse' || name === 'createCode') {
+        return fetch(API, { method: 'POST', body: JSON.stringify({ fn: name, arg: arg }) }).then(function (r) { return r.json(); }).then(unwrap);
+      }
+      var q = name === 'getCodeStats' ? 'api=code&code=' + encodeURIComponent(arg) : name === 'getLeaderboard' ? 'api=board' : 'api=boot&ref=' + encodeURIComponent(arg || '');
+      return fetch(API + (API.indexOf('?') === -1 ? '?' : '&') + q).then(function (r) { return r.json(); }).then(unwrap);
+    }
+    if (GAS) {
+      return new Promise(function (res, rej) { var r = google.script.run.withSuccessHandler(res).withFailureHandler(rej); r[name].call(r, arg); });
+    }
+    return new Promise(function (res) { setTimeout(function () { res(MOCK[name](arg)); }, 500); });
+  }
+  var EX_BOARD = [{ school: 'Example School A', n: 41 }, { school: 'Example School B', n: 33 }, { school: 'Example School C', n: 27 }, { school: 'Example School D', n: 19 }, { school: 'Example School E', n: 12 }];
+  var MOCK = {
+    getBoot: function () { return { settings: S, refInfo: null, schools: [] }; },
+    submitResponse: function (p) {
+      var sc = p.answers.school && p.answers.school !== 'Not given' ? p.answers.school : null;
+      var board = EX_BOARD.slice(); if (sc) board.splice(1, 0, { school: sc, n: 36 });
+      return { ok: true, example: true, responseNumber: 148, school: sc ? { name: sc, count: 36, rank: 2, of: 14 } : null,
+        compare: { freq: 41, concept: 58, hero: p.answers.w_hero ? 34 : null }, leaderboard: board.slice(0, 6) };
+    },
+    createCode: function () { return { ok: true, code: 'PLUM-7K2', goal: S.sharerGoal }; },
+    getCodeStats: function (code) { return { found: true, example: true, code: code || 'PLUM-7K2', type: 'Sharer', school: 'Example School B', done: 6, goal: S.sharerGoal, sharerSpotsLeft: 14 }; },
+    getLeaderboard: function () { return { example: true, leaderboard: EX_BOARD }; }
+  };
+  function linkFor(code, kind) {
+    var base = LIVE && API ? siteUrl() : 'https://jacksonlieberman.me/facevalue/';
+    return base + (code ? '?' + (kind || 'ref') + '=' + code : '');
+  }
+
+  function collect() {
+    var out = {};
+    shown().forEach(function (q) {
+      if (q.type === 'pairs') q.pairs.forEach(function (p) { if (A[p.id] != null) out[p.id] = A[p.id]; });
+      else if (q.type === 'about') { out.age = A.age; out.gender = A.gender; }
+      else if (A[q.id] != null && A[q.id] !== '' && !(Array.isArray(A[q.id]) && !A[q.id].length)) out[q.id] = A[q.id];
+    });
+    if (!out.w_hero && isW() && hero()) out.w_hero = hero();
+    return out;
+  }
+
+  function submit() {
+    setView('q'); progress(true);
+    screen.innerHTML = '<div class="end fade"><h1>Sending your answers…</h1></div>';
+    var t = routineType(), answers = collect();
+    var payload = { id: rid, ref: REF, answers: answers, seconds: Math.round((Date.now() - t0) / 1000), path: isW() ? 'Wears makeup' : isL() ? 'Stopped' : 'Never', profile: t.name };
+    api('submitResponse', payload).then(function (res) {
+      if (res && res.closed) return renderEnd('closed');
+      if (LIVE) store.set('fv_done', { type: t.key, glance: glance(answers), n: res && res.responseNumber, young: answers.age === 'Under 13' });
+      renderResult(res || {}, t, answers);
+    }, function () {
+      screen.innerHTML = '<div class="end"><h1>Your answers didn’t send.</h1><p>Check your connection and try again. Your answers are still here.</p><button class="btn primary" id="retry">Try again</button></div>';
+      document.getElementById('retry').addEventListener('click', submit);
+    });
+  }
+
+  /* ---------- results ---------- */
+  function summaryCard(t, rows, n) {
+    return '<div class="summary">' +
+      '<div class="summary-head"><p class="label">Your routine type</p><p class="type-name">' + esc(t.name) + '</p><p class="type-line">' + esc(t.line) + '</p></div>' +
+      '<div class="shade-strip" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>' +
+      '<dl class="glance">' + rows.map(function (r) { return '<div><dt>' + esc(r[0]) + '</dt><dd>' + esc(r[1]) + '</dd></div>'; }).join('') + '</dl>' +
+      (n ? '<p class="mini" style="padding:0 24px 18px;margin:0">Response ' + n + '</p>' : '') +
+    '</div>';
+  }
+  function schoolKey(s) { return String(s || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim().split(' ').filter(function (w) { return w && w !== 'the' && w !== 'school'; }).join(' '); }
+  function boardHtml(list, mine) {
+    if (!list || !list.length) return '<p class="mini">No schools on the board yet.</p>';
+    var max = Math.max.apply(null, list.map(function (r) { return r.n; })) || 1;
+    return '<ol class="board">' + list.map(function (r, i) {
+      var me = mine && schoolKey(mine) === schoolKey(r.school);
+      return '<li class="' + (me ? 'me' : '') + '"><span class="rk">' + (i + 1) + '</span><span class="nm"><span>' + esc(r.school) + (me ? ' (your school)' : '') + '</span><span class="bar"><i style="width:' + Math.max(4, Math.round(r.n / max * 100)) + '%"></i></span></span><span class="n">' + r.n + '</span></li>';
+    }).join('') + '</ol>';
+  }
+  function shareBox(young) {
+    if (young) {
+      return '<div class="share"><h2 class="h2">Share the survey</h2><p>The more people who answer, the better our results. Send this link to friends.</p>' +
+        '<div class="linkbox"><input class="field" id="linkOut" readonly value="' + esc(linkFor('')) + '" aria-label="Survey link"><button class="btn secondary" id="copyLink">Copy</button></div></div>';
+    }
+    return '<div class="share">' +
+      '<h2 class="h2">Share it and earn a L’Oréal gift box</h2>' +
+      '<p>Get your own link. When ' + S.sharerGoal + ' people finish the survey from your link, you can claim a L’Oréal gift box. Gifts go to the first ' + S.sharerLimit + ' people to reach ' + S.sharerGoal + ', and we check every count before anything ships.</p>' +
+      '<div id="shareInner"><button class="btn primary" id="makeLink">Get my link</button></div>' +
+    '</div>';
+  }
+  function bindShare(young) {
+    if (young) return copyable('copyLink', 'linkOut');
+    var saved = LIVE ? store.get('fv_code') : null;
+    if (saved && saved.code) return showLink(saved);
+    var b = document.getElementById('makeLink');
+    if (!b) return;
+    b.addEventListener('click', function () {
+      b.disabled = true; b.textContent = 'Creating your link…';
+      api('createCode', A.school && A.school !== 'Not given' ? A.school : '').then(function (r) {
+        if (!r || !r.code) throw new Error('no code');
+        if (LIVE) store.set('fv_code', { code: r.code, goal: r.goal });
+        showLink(r);
+      }).catch(function () { b.disabled = false; b.textContent = 'Try again'; });
+    });
+  }
+  function showLink(r) {
+    var inner = document.getElementById('shareInner'); if (!inner) return;
+    inner.innerHTML =
+      '<div class="linkbox"><input class="field" id="linkOut" readonly value="' + esc(linkFor(r.code)) + '" aria-label="Your share link"><button class="btn secondary" id="copyLink">Copy</button></div>' +
+      '<p class="mini">Your code is <b>' + esc(r.code) + '</b>. Keep it, because you’ll need it to claim your gift. Track your progress at <span class="sel">' + esc(linkFor(r.code, 'hub')) + '</span></p>' +
+      (S.contactEmail ? '<p class="mini">Reached ' + (r.goal || S.sharerGoal) + '? Email <span class="sel">' + esc(S.contactEmail) + '</span> with your code.</p>' : '');
+    copyable('copyLink', 'linkOut');
+  }
+  function copyable(btnId, inputId) {
+    var btn = document.getElementById(btnId), inp = document.getElementById(inputId);
+    if (!btn || !inp) return;
+    btn.addEventListener('click', function () {
+      var done = function () { btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = 'Copy'; }, 1600); };
+      var fallback = function () { inp.focus(); inp.select(); btn.textContent = 'Selected'; };
+      try { navigator.clipboard.writeText(inp.value).then(done, fallback); } catch (e) { fallback(); }
+    });
+  }
+
+  function renderResult(res, t, a) {
+    setView('result'); progress(true);
+    var young = a.age === 'Under 13';
+    var stats = '';
+    if (res.responseNumber) stats += '<div class="stat"><b>' + res.responseNumber + '</b><span>responses so far, including yours.</span></div>';
+    if (res.school && res.school.rank) stats += '<div class="stat"><b>#' + res.school.rank + '</b><span>' + esc(res.school.name) + ' ranks ' + res.school.rank + ' of ' + res.school.of + ' schools, with ' + res.school.count + ' responses.</span></div>';
+    else if (res.school) stats += '<div class="stat"><b>' + res.school.count + '</b><span>' + (res.school.count === 1 ? 'response' : 'responses') + ' from ' + esc(res.school.name) + ' so far.' + (res.school.needed ? ' ' + res.school.needed + ' more puts your school on the leaderboard.' : '') + '</span></div>';
+    var c = res.compare || {};
+    if (c.freq != null) stats += '<div class="stat"><b>' + c.freq + '%</b><span>of people also answered <q>' + esc(a.freq) + '</q>.</span></div>';
+    if (c.hero != null && a.w_hero) stats += '<div class="stat"><b>' + c.hero + '%</b><span>of people who wear makeup would also keep ' + esc(short(a.w_hero)) + '.</span></div>';
+    if (c.concept != null) stats += '<div class="stat"><b>' + c.concept + '%</b><span>would probably or definitely try the concealer stick. You said <q>' + esc(SCALE[(a.concept_try || 1) - 1]) + '</q>.</span></div>';
+
+    screen.innerHTML = '<div class="result fade">' +
+      '<div class="col">' + summaryCard(t, glance(a), res.responseNumber) + '</div>' +
+      '<div class="col">' +
+        '<div><p class="label">Thank you</p><h1 class="q-title">How your answers compare</h1></div>' +
+        (res.example ? '<p class="example-note">Example numbers (preview)</p>' : '') +
+        '<div class="stats">' + stats + '</div>' +
+        shareBox(young) +
+        '<div><h2 class="h2">Responses by school</h2>' + boardHtml(res.leaderboard, a.school) + '</div>' +
+      '</div></div>';
+    bindShare(young);
+    toTop();
+  }
+
+  /* ---------- link tracker ---------- */
+  function renderHub(code) {
+    setView('result'); progress(true);
+    screen.innerHTML = '<div class="hub"><p class="label">Link tracker</p><h1 class="q-title">Checking your link…</h1></div>';
+    Promise.all([api('getCodeStats', code), api('getLeaderboard')]).then(function (rs) {
+      var r = rs[0] || {}, b = rs[1] || {};
+      if (!r.found) return hubLookup(code);
+      var goal = r.goal || S.sharerGoal, done = r.done || 0, left = Math.max(0, goal - done);
+      var cells = ''; for (var i = 0; i < goal; i++) cells += '<i class="' + (i < done ? 'on' : '') + '"></i>';
+      var msg;
+      if (done >= goal) msg = 'You reached your goal. Email ' + (S.contactEmail ? '<span class="sel">' + esc(S.contactEmail) + '</span>' : 'the team') + ' with your code to claim your gift. We’ll check the count first.';
+      else if (r.type !== 'Ambassador' && r.sharerSpotsLeft === 0) msg = 'All the gift boxes for shared links have been claimed. Responses from your link still count toward your school’s total.';
+      else msg = left + ' more to go.' + (r.type !== 'Ambassador' && r.sharerSpotsLeft != null ? ' ' + r.sharerSpotsLeft + ' of ' + S.sharerLimit + ' gift boxes are still available.' : '');
+      screen.innerHTML = '<div class="hub fade">' +
+        '<div><p class="label">Link tracker' + (r.type === 'Ambassador' ? ' · Ambassador' : '') + '</p>' +
+        '<span class="code-tag">' + esc(r.code) + '</span>' +
+        '<p class="hub-num">' + done + '<small>of ' + goal + ' finished</small></p>' +
+        (r.example ? '<p class="example-note">Example numbers (preview)</p>' : '') +
+        '<div class="goal-grid" aria-hidden="true">' + cells + '</div>' +
+        '<p>' + msg + '</p></div>' +
+        '<div class="share"><h2 class="h2">Your link</h2><div class="linkbox"><input class="field" id="hubLinkOut" readonly value="' + esc(linkFor(r.code)) + '" aria-label="Your share link"><button class="btn secondary" id="hubCopy">Copy</button></div><p class="mini">Only completed surveys count, and each one is checked before gifts ship.</p></div>' +
+        '<div><h2 class="h2">Responses by school</h2>' + boardHtml(b.leaderboard, r.school) + '</div>' +
+      '</div>';
+      copyable('hubCopy', 'hubLinkOut');
+    }, function () { hubLookup(code, true); });
+    toTop();
+  }
+  function hubLookup(code, failed) {
+    screen.innerHTML = '<div class="hub"><p class="label">Link tracker</p><h1 class="q-title">' + (failed ? 'We couldn’t load that code.' : code ? 'We couldn’t find that code.' : 'Check your link') + '</h1>' +
+      '<p class="q-help">Enter the code from your link. It looks like PLUM-7K2.</p>' +
+      '<div class="linkbox"><input class="field" id="codeIn" maxlength="24" autocomplete="off" value="' + esc(code || '') + '" aria-label="Your code"><button class="btn primary" id="codeGo">Check</button></div></div>';
+    document.getElementById('codeGo').addEventListener('click', function () { var v = cleanCode(document.getElementById('codeIn').value); if (v) renderHub(v); });
+  }
+
+  /* ---------- other screens ---------- */
+  function renderEnd(kind) {
+    setView('end');
+    if (kind === 'closed') screen.innerHTML = '<div class="end fade"><h1>This survey is closed.</h1><p>Thank you to everyone who took part. The results are going into our class presentation.</p></div>';
+    toTop();
+  }
+  function renderDone(saved) {
+    setView('result'); progress(true);
+    var t = TYPES[saved.type] ? { name: TYPES[saved.type][0], line: TYPES[saved.type][1] } : { name: 'Thank you', line: '' };
+    screen.innerHTML = '<div class="result fade"><div class="col">' + summaryCard(t, saved.glance || [], saved.n) + '</div><div class="col">' +
+      '<div><p class="label">Already completed</p><h1 class="q-title">You’ve already taken this survey on this device.</h1><p class="q-help">One response per person keeps the results accurate. You can still share it.</p></div>' +
+      shareBox(saved.young) + '<div id="doneBoard"></div></div></div>';
+    bindShare(saved.young);
+    api('getLeaderboard').then(function (b) { var el = document.getElementById('doneBoard'); if (el) el.innerHTML = '<h2 class="h2">Responses by school</h2>' + boardHtml(b && b.leaderboard); }, function () { });
+  }
+  function applySettings(boot) {
+    if (!boot) return;
+    if (boot.settings) Object.keys(boot.settings).forEach(function (k) { if (boot.settings[k] !== '' && boot.settings[k] != null) S[k] = boot.settings[k]; });
+    refInfo = boot.refInfo || null;
+    knownSchools = boot.schools || [];
+    if (S.contactEmail) document.getElementById('footContact').innerHTML = 'Questions: <span class="sel">' + esc(S.contactEmail) + '</span>';
+  }
+
+  /* ---------- start ---------- */
+  function route() {
+    if (HUB) return renderHub(HUB);
+    if (!LIVE && location.hash === '#hub') return renderHub('PLUM-7K2');
+    if (!S.open) return renderEnd('closed');
+    if (LIVE && store.get('fv_done')) return renderDone(store.get('fv_done'));
+    renderIntro();
+  }
+  if (!LIVE) {
+    document.getElementById('previewBand').hidden = false;
+    document.getElementById('restartPreview').addEventListener('click', function (e) { e.preventDefault(); if (location.hash) location.hash = ''; renderIntro(); });
+    window.addEventListener('hashchange', function () { if (location.hash === '#hub') renderHub('PLUM-7K2'); else renderIntro(); });
+    route();
+  } else if (window.BOOT) {
+    applySettings(window.BOOT); route();
+  } else {
+    route();
+    api('getBoot', REF).then(function (boot) {
+      applySettings(boot);
+      if (app.dataset.view === 'intro') route();       // refresh the cover with the referral line and settings
+      else if (!S.open && !trail.length) renderEnd('closed');
+    }, function () { });
+  }
+
+  window.__fv = { collect: collect, shown: function () { return shown().map(function (q) { return q.id; }); } };
+})();
+</script>
+</body>
+</html>
