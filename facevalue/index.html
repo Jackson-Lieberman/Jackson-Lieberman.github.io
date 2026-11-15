@@ -52,6 +52,8 @@ button{font:inherit;color:inherit}
 .c-t1{fill:var(--t1)} .c-t2{fill:var(--t2)} .c-t3{fill:var(--t3)} .c-t4{fill:var(--t4)} .c-t5{fill:var(--t5)} .c-t6{fill:var(--t6)}
 .c-ring{fill:none;stroke:var(--ink-2);stroke-width:2.5;stroke-dasharray:4 5}
 .c-label{fill:var(--ink-2);font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.1em}
+.c-tag{fill:var(--ink);font-family:var(--sans);font-size:19px;font-weight:700}
+.s-t2{fill:none;stroke:var(--t2)}
 
 .preview-band{background:var(--ink);color:var(--bg);font-size:13px;padding-block:8px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-wrap:wrap;gap:4px 16px;justify-content:center}
 .preview-band a{color:inherit}
@@ -123,11 +125,14 @@ button{font:inherit;color:inherit}
 @keyframes shake{25%{transform:translateX(-3px)}75%{transform:translateX(3px)}}
 
 /* which best describes you */
-.pairs{display:grid;gap:12px}
-.pair{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--surface)}
-.pair button{border:0;background:none;cursor:pointer;padding:20px 14px;text-align:center;font-weight:600;font-size:17px;line-height:1.2;transition:background .15s,color .15s}
-.pair button:first-child{border-right:1px solid var(--line)}
-.pair button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.pairs{display:grid;gap:24px}
+.pair-q{font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);margin:0 0 8px}
+.pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.pair .card{flex-direction:row;align-items:center;gap:14px;padding:14px 40px 14px 14px}
+.pair .card>svg{width:60px;height:60px;padding:6px;border-radius:8px;background:var(--panel)}
+.pair .card b{display:block;font-size:16px;font-weight:600}
+.pair .card small{margin-top:3px}
+@media (max-width:540px){.pair .card{flex-direction:column;align-items:flex-start;padding:14px}}
 
 /* price */
 .price-read{font-family:var(--serif);font-size:clamp(56px,11vw,88px);line-height:1;margin:0;font-variant-numeric:tabular-nums}
@@ -143,10 +148,25 @@ button{font:inherit;color:inherit}
 .scale b{font-family:var(--serif);font-weight:400;font-size:24px;line-height:1}
 .scale button[aria-pressed="true"]{border-color:var(--accent);background:var(--accent);color:var(--accent-ink)}
 
-.concept{display:grid;gap:18px;margin-top:24px}
+.concept{display:grid;gap:22px;margin-top:24px}
 .art{border-radius:12px;overflow:hidden;line-height:0;background:var(--panel)}
 .art svg{width:100%;height:auto;display:block}
-.concept-copy{font-size:17px;max-width:60ch;margin:0}
+.concept-card{display:grid;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--surface)}
+@media (min-width:640px){.concept-card{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr)}}
+.concept-art{background:var(--panel);line-height:0;display:flex;align-items:center}
+.concept-art svg{width:100%;height:auto;display:block}
+.concept-body{padding:22px;display:grid;gap:16px;align-content:start}
+.concept-name{font-family:var(--serif);font-size:28px;line-height:1.1;margin:0}
+.features{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.features li{display:grid;grid-template-columns:34px minmax(0,1fr);gap:12px;align-items:start}
+.features .fi{width:34px;height:34px;border-radius:8px;background:var(--tint);color:var(--accent);display:grid;place-items:center}
+.features .fi svg{width:18px;height:18px}
+.features b{display:block;font-weight:600;font-size:15px;line-height:1.3}
+.features span{display:block;font-size:14px;color:var(--ink-2);line-height:1.4}
+.ba{display:flex;align-items:center;gap:14px;padding-top:16px;border-top:1px solid var(--line)}
+.ba figure{margin:0;display:grid;justify-items:center;gap:6px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2)}
+.ba figure svg{width:58px;height:58px}
+.ba .arrow{width:28px;height:14px;color:var(--ink-2);flex:none;margin-bottom:18px}
 
 .field{width:100%;padding:14px 16px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font:500 17px/1.3 var(--sans)}
 .field:focus{border-color:var(--accent);outline:none;box-shadow:0 0 0 1px var(--accent)}
@@ -296,6 +316,13 @@ textarea.field{min-height:130px;resize:vertical;line-height:1.45}
     lipstick: '<rect class="c-ink" x="21" y="36" width="22" height="22" rx="2.5"/><rect class="c-metal" x="23" y="29" width="18" height="8" rx="1"/><path class="c-lip" d="M25 29V15.5c0-2 1.2-3.6 3-4.3L39 7v22z"/>',
     none: '<circle class="c-ring" cx="32" cy="32" r="20"/>'
   };
+  function sub(n, x, y, s) { return '<g transform="translate(' + x + ' ' + y + ') scale(' + s + ')">' + I[n] + '</g>'; }
+  I.natural = '<rect class="c-t1" x="2" y="40" width="46" height="13" rx="6.5" transform="rotate(-14 25 46)"/>' + sub('tube', 22, 2, 0.62);
+  I.glam = '<rect class="c-ink" x="3" y="18" width="40" height="30" rx="5"/><circle class="c-lip" cx="14" cy="28" r="4.5"/><circle class="c-metal" cx="23" cy="28" r="4.5"/><circle class="c-acc" cx="32" cy="28" r="4.5"/><circle class="c-t5" cx="14" cy="38.5" r="4.5"/><circle class="c-t4" cx="23" cy="38.5" r="4.5"/><circle class="c-lip" cx="32" cy="38.5" r="4.5" opacity=".6"/>' + sub('lipstick', 33, 8, 0.6);
+  I.tag = '<path class="c-t1" d="M7 31 29 9h25v25L32 56z"/><circle class="c-panel" cx="45" cy="18" r="3.6"/><text class="c-tag" x="24" y="41">$</text>';
+  I.gift = '<rect class="c-ink" x="12" y="30" width="40" height="27" rx="2"/><rect class="c-ink" x="9" y="22" width="46" height="10" rx="2"/><rect class="c-metal" x="29" y="22" width="6" height="35"/><path class="c-metal" d="M32 22c-5-9-15-10-14-4 1 4 8 4 14 4zm0 0c5-9 15-10 14-4-1 4-8 4-14 4z"/>';
+  I.skincare = sub('dropper', -5, 6, 0.85) + sub('tube', 23, 10, 0.75);
+  I.makeup = sub('stick', -6, 8, 0.8) + sub('mascara', 21, 7, 0.8);
   function icon(n) { return '<svg viewBox="0 0 64 64" aria-hidden="true" focusable="false">' + I[n] + '</svg>'; }
   function place(n, x, y, s) { return '<g transform="translate(' + x + ' ' + y + ') scale(' + s + ')">' + I[n] + '</g>'; }
   var TICK = '<span class="tick" aria-hidden="true"><svg viewBox="0 0 12 12"><path d="M2 6.4 4.8 9 10 3.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>';
@@ -311,16 +338,36 @@ textarea.field{min-height:130px;resize:vertical;line-height:1.45}
     '</svg>';
   }
   function conceptArt() {
-    return '<svg viewBox="0 0 560 240" role="img" aria-label="A concealer stick next to skin with a red spot, then the same skin with the spot covered">' +
-      '<rect class="c-panel" x="0" y="0" width="560" height="240"/>' +
-      place('stick', 22, 30, 2.9) +
-      '<rect class="c-t2" x="226" y="34" width="150" height="172" rx="12"/>' +
-      '<rect class="c-t2" x="392" y="34" width="150" height="172" rx="12"/>' +
-      '<circle class="c-lip" cx="301" cy="126" r="15" opacity=".35"/><circle class="c-lip" cx="301" cy="126" r="7" opacity=".85"/>' +
-      '<circle class="c-lip" cx="467" cy="126" r="15" opacity=".07"/>' +
-      '<text class="c-label" x="242" y="62">BEFORE</text>' +
-      '<text class="c-label" x="408" y="62">AFTER 10 SEC</text>' +
+    return '<svg viewBox="0 0 340 300" role="img" aria-label="An uncapped concealer stick standing next to its cap, with a swipe of skin-tone product">' +
+      '<rect class="c-panel" x="0" y="0" width="340" height="300"/>' +
+      '<path class="s-t2" d="M26 268c70-22 170 12 288-14" stroke-width="20" stroke-linecap="round" opacity=".75"/>' +
+      '<ellipse class="c-line" cx="132" cy="246" rx="52" ry="8"/><ellipse class="c-line" cx="244" cy="246" rx="42" ry="7"/>' +
+      sub('stick', 17, 41, 3.6) +
+      '<rect class="c-ink" x="110" y="178" width="46" height="3" rx="1.5" opacity=".18"/><rect class="c-ink" x="110" y="188" width="30" height="3" rx="1.5" opacity=".18"/>' +
+      '<g transform="rotate(10 244 205)"><rect class="c-ink" x="208" y="160" width="72" height="84" rx="9"/><rect class="c-metal" x="208" y="226" width="72" height="5"/><rect class="c-surf" x="218" y="170" width="4" height="48" rx="2" opacity=".25"/></g>' +
     '</svg>';
+  }
+  var FI = {
+    time: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13.5" r="8" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 13.5V9.5M9.5 2.5h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
+    hidden: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12S6 6 12 6s9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="12" cy="12" r="2.6" fill="none" stroke="currentColor" stroke-width="2"/><path d="M4 20 20 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
+    drop: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c3.6 4.6 6 7.7 6 10.6a6 6 0 0 1-12 0C6 10.7 8.4 7.6 12 3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>'
+  };
+  function conceptCard() {
+    var skin = function (spot) { return '<svg viewBox="0 0 64 64" aria-hidden="true"><circle class="c-t2" cx="32" cy="32" r="29"/><circle class="c-lip" cx="38" cy="27" r="8" opacity="' + (spot ? '.35' : '.06') + '"/>' + (spot ? '<circle class="c-lip" cx="38" cy="27" r="3.8" opacity=".85"/>' : '') + '</svg>'; };
+    return '<div class="concept-card">' +
+      '<div class="concept-art">' + conceptArt() + '</div>' +
+      '<div class="concept-body">' +
+        '<div><p class="label" style="margin-bottom:6px">The idea</p><p class="concept-name">A 10-second concealer stick</p></div>' +
+        '<ul class="features">' +
+          '<li><span class="fi">' + FI.time + '</span><div><b>Done in about 10 seconds</b><span>Swipe it over a breakout or redness and blend with a fingertip.</span></div></li>' +
+          '<li><span class="fi">' + FI.hidden + '</span><div><b>Looks like skin, not makeup</b><span>Made so no one can tell you’re wearing it.</span></div></li>' +
+          '<li><span class="fi">' + FI.drop + '</span><div><b>Skincare built in</b><span>Acne-fighting ingredients treat the spot while it’s covered.</span></div></li>' +
+        '</ul>' +
+        '<div class="ba"><figure>' + skin(true) + '<figcaption>Before</figcaption></figure>' +
+          '<svg class="arrow" viewBox="0 0 28 14" aria-hidden="true"><path d="M1 7h24M19 1l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
+          '<figure>' + skin(false) + '<figcaption>10 sec later</figcaption></figure></div>' +
+      '</div>' +
+    '</div>';
   }
 
   /* ---------- questions ---------- */
@@ -370,10 +417,10 @@ textarea.field{min-height:130px;resize:vertical;line-height:1.45}
       options: ['To cover acne, redness or uneven skin', 'To look put-together', 'To feel more confident', 'To express myself', 'For photos or social media', 'It’s part of my routine'] },
     { id: 'w_when', type: 'chipsMulti', show: isW, label: 'Your routine', title: 'When do you wear it?', help: 'Select all that apply.',
       options: ['School', 'Sports or practice', 'Hanging out with friends', 'Dances, parties or events', 'Work', 'Photos or videos'] },
-    { id: 'w_pairs', type: 'pairs', show: isW, label: 'Your style', title: 'Which best describes you?', help: 'Pick one from each row.',
-      pairs: [{ id: 'w_look', a: 'Barely there', b: 'Noticeable' },
-              { id: 'w_shop', a: 'Drugstore', b: 'Splurge' },
-              { id: 'w_first', a: 'Skincare first', b: 'Makeup first' }] },
+    { id: 'w_pairs', type: 'pairs', show: isW, label: 'Your style', title: 'Which best describes you?', help: 'Pick one in each row.',
+      pairs: [{ id: 'w_look', q: 'Your usual look', a: { v: 'Natural', icon: 'natural', note: 'Looks like your skin, just better' }, b: { v: 'Full glam', icon: 'glam', note: 'Bold and noticeable' } },
+              { id: 'w_shop', q: 'When you shop', a: { v: 'Drugstore finds', icon: 'tag', note: 'Affordable and easy to grab' }, b: { v: 'Worth the splurge', icon: 'gift', note: 'Paying more for the good stuff' } },
+              { id: 'w_first', q: 'If you could only keep one', a: { v: 'Skincare first', icon: 'skincare', note: 'Cleanser, moisturizer, SPF' }, b: { v: 'Makeup first', icon: 'makeup', note: 'Concealer, mascara and the rest' } }] },
     { id: 'w_brand', type: 'brand', show: isW, label: 'Brands', title: 'What’s your go-to makeup brand right now?', help: 'Type it, or select one.', options: shuffle(BRANDS) },
     { id: 'w_brand_why', type: 'chipsMulti', max: 3, show: function () { return isW() && !!A.w_brand && A.w_brand !== 'No go-to brand'; }, label: 'Brands',
       title: function () { return 'What makes ' + esc(A.w_brand) + ' your go-to?'; }, help: 'Select up to 3.',
@@ -511,9 +558,10 @@ textarea.field{min-height:130px;resize:vertical;line-height:1.45}
       case 'pairs':
         body = '<div class="pairs">' + q.pairs.map(function (p) {
           var val = A[p.id];
-          return '<div class="pair" data-pair="' + p.id + '" role="group">' +
-            '<button data-v="' + esc(p.a) + '" aria-pressed="' + (val === p.a) + '">' + esc(p.a) + '</button>' +
-            '<button data-v="' + esc(p.b) + '" aria-pressed="' + (val === p.b) + '">' + esc(p.b) + '</button></div>';
+          return '<div><p class="pair-q" id="pq-' + p.id + '">' + esc(p.q) + '</p><div class="pair" data-pair="' + p.id + '" role="group" aria-labelledby="pq-' + p.id + '">' +
+            [p.a, p.b].map(function (o) {
+              return '<button class="card" data-v="' + esc(o.v) + '" aria-pressed="' + (val === o.v) + '">' + icon(o.icon) + '<span><b>' + esc(o.v) + '</b><small>' + esc(o.note) + '</small></span>' + TICK + '</button>';
+            }).join('') + '</div></div>';
         }).join('') + '</div>';
         break;
       case 'slider':
@@ -524,11 +572,10 @@ textarea.field{min-height:130px;resize:vertical;line-height:1.45}
         break;
       case 'concept':
         needsNext = false;
-        body = '<div class="concept"><div class="art">' + conceptArt() + '</div>' +
-          '<p class="concept-copy">A concealer stick that covers a breakout or redness in about 10 seconds. It looks like skin, not makeup, and it contains acne-fighting skincare ingredients.</p>' +
-          '<div class="scale">' + SCALE.map(function (s, i) {
+        body = '<div class="concept">' + conceptCard() +
+          '<div><p class="label">How likely are you to try it?</p><div class="scale">' + SCALE.map(function (s, i) {
             return '<button data-v="' + (i + 1) + '" aria-pressed="' + (String(A.concept_try) === String(i + 1)) + '"><b>' + (i + 1) + '</b>' + esc(s) + '</button>';
-          }).join('') + '</div></div>';
+          }).join('') + '</div></div></div>';
         break;
       case 'brand':
         body = '<div class="stack-gap"><input class="field" id="brandIn" type="text" maxlength="60" autocomplete="off" placeholder="Brand name" value="' + esc(A.w_brand && A.w_brand !== 'No go-to brand' ? A.w_brand : '') + '" aria-label="Brand name">' +
@@ -690,7 +737,7 @@ textarea.field{min-height:130px;resize:vertical;line-height:1.45}
     var k;
     if (isW()) {
       if (A.freq === 'Only for special occasions') k = 'occasion';
-      else if (A.w_look === 'Noticeable') k = 'full';
+      else if (A.w_look === 'Full glam') k = 'full';
       else if (A.w_first === 'Skincare first') k = 'skin';
       else k = 'minimal';
     } else if (isL()) k = 'pause';
